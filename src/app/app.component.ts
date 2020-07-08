@@ -3,6 +3,7 @@ import { LoginComponent } from './login/login.component'
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { getSyntheticPropertyName } from '@angular/compiler/src/render3/util';
 import { DIR_DOCUMENT } from '@angular/cdk/bidi';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,29 @@ export class AppComponent {
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     this.events.push(`${type}: ${event.value}`);
+  }
+
+  myList=[
+    'a',
+    'b',
+    'f',
+    'Episode I - The Phantom Menace',
+    'Episode II - Attack of the Clones',
+    'Episode III - Revenge of the Sith',
+    'Episode IV - A New Hope',
+    'Episode V - The Empire Strikes Back',
+    'Episode VI - Return of the Jedi',
+    'Episode VII - The Force Awakens',
+    'Episode VIII - The Last Jedi',
+    'Episode IX – The Rise of Skywalker'
+  ]
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    // console.log(event);
+    // this.postmanService.demo()
+    // debugger
+    moveItemInArray(this.myList, event.previousIndex, event.currentIndex);
   }
 }
 

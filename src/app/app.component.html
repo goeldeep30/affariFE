@@ -4,6 +4,10 @@
 <app-login></app-login>
 <app-kanban></app-kanban>
 
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let item of myList" cdkDrag>{{item}}}</div>
+</div>
+
 
 
 
