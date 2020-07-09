@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { PostmanService } from '../postman.service'
 
 
 @Component({
@@ -7,13 +9,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./kanban.component.scss']
 })
 export class KanbanComponent implements OnInit {
-  titlee:string;
-  subTitlee:string;
-  constructor() { } 
+  blocked:Object[];
+  todo: Object[];
+  in_progress: Object[];
+  done: Object[];
+  constructor(private postmanService: PostmanService) { } 
 
   ngOnInit(): void {
-    this.titlee = 'deep';
-    this.subTitlee ='MZP';
+    this.postmanService.getTasks().subscribe((response) => {
+      this.blocked = response['blocked']
+      this.todo = response['to_do'];
+      this.in_progress = response['in_progress'];
+      this.done = response['done'];
+    });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
   }
 
 }

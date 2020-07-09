@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,7 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DragDropModule } from 'primeng/dragdrop';
 import { MaterialModule } from './shared/material-module'
 import { PrimeNgModule } from './shared/prime-ng-module'
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     SliderModule,
     InputTextModule,
@@ -39,7 +41,8 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     DragDropModule,
     ReactiveFormsModule,
     MaterialModule,
-    PrimeNgModule
+    PrimeNgModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

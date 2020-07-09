@@ -29,11 +29,11 @@ export class AppComponent {
     'Episode IX – The Rise of Skywalker'
   ]
 
+  arr = [1,3,5,76,8,9,3];
 
   drop(event: CdkDragDrop<string[]>) {
     // console.log(event);
     // this.postmanService.demo()
-    // debugger
     moveItemInArray(this.myList, event.previousIndex, event.currentIndex);
   }
 }
