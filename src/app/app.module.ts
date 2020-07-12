@@ -20,6 +20,7 @@ import { KanbanComponent } from './kanban/kanban.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     KanbanComponent,
     NavbarComponent,
     TaskCardComponent,
-    SideNavComponent
+    SideNavComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,
