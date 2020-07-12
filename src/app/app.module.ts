@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChipsModule } from 'primeng/chips';
@@ -11,6 +11,7 @@ import { DragDropModule } from 'primeng/dragdrop';
 import { MaterialModule } from './shared/material-module'
 import { PrimeNgModule } from './shared/prime-ng-module'
 import { HttpClientModule } from '@angular/common/http';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 
 import { AppComponent } from './app.component';
@@ -44,7 +45,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     PrimeNgModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

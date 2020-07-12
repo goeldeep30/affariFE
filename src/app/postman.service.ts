@@ -17,7 +17,11 @@ export class PostmanService {
   }
 
   getTasks() {
-    return this.http.get('https://be087e9a6f56.ngrok.io/tasks', { responseType: 'json' });
+    return this.http.get('https://api.razorpay.com/', { responseType: 'json' });
+  }
+
+  getAPICheck() {
+    return this.http.get('http://localhost:5000', { responseType: 'json' });
   }
 
 }

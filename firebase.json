@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/Affari",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
