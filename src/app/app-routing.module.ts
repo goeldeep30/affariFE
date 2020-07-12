@@ -7,7 +7,7 @@ import { KanbanComponent } from './kanban/kanban.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'kanban', component: KanbanComponent },
+  { path: 'kanban/:projectid', component: KanbanComponent },
 
 ];
 

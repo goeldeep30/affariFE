@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { PostmanService } from '../postman.service'
 
@@ -13,10 +14,11 @@ export class KanbanComponent implements OnInit {
   todo: Object[];
   in_progress: Object[];
   done: Object[];
-  constructor(private postmanService: PostmanService) { } 
+  constructor(private route: ActivatedRoute, private postmanService: PostmanService) { } 
 
   ngOnInit(): void {
-    this.postmanService.getTasks().subscribe((response) => {
+    const projectId = this.route.snapshot.paramMap.get('projectid')
+    this.postmanService.getTasks(+projectId).subscribe((response) => {
       this.blocked = response['blocked']
       this.todo = response['to_do'];
       this.in_progress = response['in_progress'];
