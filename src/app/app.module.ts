@@ -8,9 +8,9 @@ import { ChipsModule } from 'primeng/chips';
 import { SliderModule } from 'primeng/slider';
 import { InputTextModule } from 'primeng/inputtext';
 import { DragDropModule } from 'primeng/dragdrop';
-import { MaterialModule } from './shared/material-module'
-import { PrimeNgModule } from './shared/prime-ng-module'
-import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from './shared/material-module';
+import { PrimeNgModule } from './shared/prime-ng-module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 
@@ -21,6 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { TokenIntercepterService } from './token-intercepter.service';
+
 
 @NgModule({
   declarations: [
@@ -45,9 +47,13 @@ import { ProjectsComponent } from './projects/projects.component';
     ReactiveFormsModule,
     MaterialModule,
     PrimeNgModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
-  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }],
+  providers: [
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenIntercepterService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

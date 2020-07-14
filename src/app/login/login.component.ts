@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { PostmanService } from '../postman.service';
 
 
 @Component({
@@ -16,17 +17,21 @@ export class LoginComponent implements OnInit {
   ]);
 
   matcher = new MyErrorStateMatcher();
-  constructor() { }
+  constructor(private postmanService: PostmanService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  authoriseMe(credentials: object): void {
+    this.postmanService.getAuthToken(credentials).subscribe((response) => {
+      console.log(response);
+      localStorage.setItem('user', JSON.stringify(response));
+    });
   }
 
-  private toggle_statement() {
+  onSubmit(form: NgForm): void {
+    this.authoriseMe(form.value);
   }
 
-  func() {
-    this.toggle_statement()
-  }
 }
 
 

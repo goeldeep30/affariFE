@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { PostmanService } from '../postman.service'
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { PostmanService } from '../postman.service';
 
 
 @Component({
@@ -10,31 +11,48 @@ import { PostmanService } from '../postman.service'
   styleUrls: ['./kanban.component.scss']
 })
 export class KanbanComponent implements OnInit {
-  blocked:Object[];
-  todo: Object[];
-  in_progress: Object[];
-  done: Object[];
-  constructor(private route: ActivatedRoute, private postmanService: PostmanService) { } 
+  private projectId: number;
+  blocked: object[];
+  todo: object[];
+  inProgress: object[];
+  done: object[];
+  constructor(private route: ActivatedRoute, private postmanService: PostmanService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    const projectId = this.route.snapshot.paramMap.get('projectid')
-    this.postmanService.getTasks(+projectId).subscribe((response) => {
-      this.blocked = response['blocked']
-      this.todo = response['to_do'];
-      this.in_progress = response['in_progress'];
-      this.done = response['done'];
+    this.projectId = +this.route.snapshot.paramMap.get('projectid');
+    this.updateKanban(this.projectId);
+  }
+  private updateKanban(projectId: number): void{
+    this.postmanService.getTasks(this.projectId).subscribe((response) => {
+      this.blocked = response.blocked;
+      this.todo = response.to_do;
+      this.inProgress = response.in_progress;
+      this.done = response.done;
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+
+      this.openSnackBar('Somethin is changed', 'refresh');
     }
+  }
+
+  openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    }).onAction().subscribe(() => {
+      console.log('Action taken on snackbar');
+      this.updateKanban(this.projectId);
+
+    });
   }
 
 }

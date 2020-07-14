@@ -21,8 +21,8 @@
 
     <div class="col-sm kanban-status example-container">
       <h3><span class="badge badge-secondary">Inprogress</span></h3>
-      <div cdkDropList [cdkDropListData]="in_progress" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let task of in_progress;">
+      <div cdkDropList [cdkDropListData]="inProgress" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let task of inProgress;">
           <app-task-card [title]="task.subject"></app-task-card>
         </div>
       </div>

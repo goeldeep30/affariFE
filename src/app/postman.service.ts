@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +13,28 @@ export class PostmanService {
     alert('I am demo func from PM sevice');
   }
 
-  getTodos() {
+  getTodos(): Observable<any> {
     return this.http.get('https://be087e9a6f56.ngrok.io', { responseType: 'json' });
   }
 
-  getProjects() {
+  getProjects(): Observable<any> {
     return this.http.get('http://localhost:5000/projects', { responseType: 'json' });
   }
 
-  getTasks(project_id: number) {
-    return this.http.get(`http://localhost:5000/tasks?project_id=${project_id}`, { responseType: 'json' });
+  getTasks(projectId: number): Observable<any> {
+    return this.http.get(`http://localhost:5000/tasks?project_id=${projectId}`, { responseType: 'json' });
   }
 
-  getAPICheck() {
+  getAPICheck(): Observable<any> {
     return this.http.get('http://localhost:5000', { responseType: 'json' });
+  }
+
+  getAuthToken(credentials: object): Observable<any> {
+    return this.http.post(
+      'http://localhost:5000/login',
+      credentials,
+      { responseType: 'json' }
+    );
   }
 
 
