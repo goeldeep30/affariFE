@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { PostmanService } from '../postman.service';
+import { RoutingService } from '../routing.service';
+
 
 @Component({
   selector: 'app-projects',
@@ -10,18 +11,23 @@ import { PostmanService } from '../postman.service';
 export class ProjectsComponent implements OnInit {
   projects: object;
 
-  constructor(private router: Router,
+  constructor(private routingService: RoutingService,
               private postmanService: PostmanService) { }
 
   ngOnInit(): void {
     this.postmanService.getProjects().subscribe((response) => {
       // debugger
-      this.projects = response['Projects'];
-    });
+      this.projects = response.Projects;
+    },
+      error => {
+        if (error.status === 401){
+          this.routingService.navigateToLogin();
+        }
+      });
   }
 
   onSelect(projectId: number): void {
-    this.router.navigate(['kanban', projectId]);
+    this.routingService.navigateToKanban(projectId);
   }
 
 }

@@ -23,6 +23,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TokenIntercepterService } from './token-intercepter.service';
 import { AuthGuard } from './auth.guard';
+import { CreateTaskComponent } from './create-task/create-task.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AuthGuard } from './auth.guard';
     NavbarComponent,
     TaskCardComponent,
     SideNavComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    CreateTaskComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { PostmanService } from '../postman.service';
-import { Router } from '@angular/router';
+import { RoutingService } from '../routing.service';
 
 
 @Component({
@@ -19,14 +19,14 @@ export class LoginComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
   constructor(private postmanService: PostmanService,
-              private router: Router) { }
+              private routingService: RoutingService) { }
 
   ngOnInit(): void { }
 
   authoriseMe(credentials: object): void {
     this.postmanService.getAuthToken(credentials).subscribe((response) => {
       localStorage.setItem('user', JSON.stringify(response));
-      this.router.navigate(['/projects']);
+      this.routingService.navigateToProjects();
     });
   }
 

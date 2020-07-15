@@ -1,5 +1,9 @@
 <div>
-  <button type="button" class="btn btn-light" (click)="createNewTask()">Create New</button>
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" (click)="createNewTask()">
+  Create New
+</button>
+<app-create-task></app-create-task>
   <div class="container-fluid">
     <div cdkDropListGroup class="row kanban">
 
