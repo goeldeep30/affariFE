@@ -55,4 +55,7 @@ export class KanbanComponent implements OnInit {
     });
   }
 
+  createNewTask(): void{
+    
+  }
 }

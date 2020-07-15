@@ -22,6 +22,7 @@ import { TaskCardComponent } from './task-card/task-card.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TokenIntercepterService } from './token-intercepter.service';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { TokenIntercepterService } from './token-intercepter.service';
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: TokenIntercepterService, multi: true },
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

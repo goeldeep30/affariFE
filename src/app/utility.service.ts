@@ -12,10 +12,16 @@ export class UtilityService {
   }
 
   public getToken(): object{
-    return JSON.parse(localStorage.getItem('user'))['access_token'];
+    if (this.loggedIn()){
+      return JSON.parse(localStorage.getItem('user'))['access_token'];
+    }
   }
 
   public getRefreshToken(): object{
     return JSON.parse(localStorage.getItem('user'));
+  }
+
+  public loggedIn(): boolean{
+    return !!localStorage.getItem('user');
   }
 }
