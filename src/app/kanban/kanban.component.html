@@ -1,14 +1,14 @@
 <div>
   <!-- Button trigger modal -->
-<button mat-button (click)="openDialog()">Create new</button>
+  <button mat-button (click)="openDialog()">Create new</button>
   <div class="container-fluid">
     <div cdkDropListGroup class="row kanban">
 
       <div class="col-sm kanban-status example-container">
         <h3><span class="badge badge-secondary">Blocked</span></h3>
         <div cdkDropList [cdkDropListData]="blocked" class="example-list" (cdkDropListDropped)="drop($event)">
-          <div *ngFor="let task of blocked;">
-            <app-task-card [title]="task.subject"></app-task-card>
+          <div *ngFor="let task of blocked;" class="pad">
+            <app-task-card [title]="task.subject" [description]="task.description"></app-task-card>
           </div>
         </div>
       </div>
@@ -16,8 +16,8 @@
       <div class="col-sm kanban-status example-container">
         <h3><span class="badge badge-secondary">To do</span></h3>
         <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
-          <div *ngFor="let task of todo;">
-            <app-task-card [title]="task.subject"></app-task-card>
+          <div *ngFor="let task of todo;" class="pad">
+            <app-task-card [title]="task.subject" [description]="task.description"></app-task-card>
           </div>
         </div>
       </div>
@@ -25,8 +25,8 @@
       <div class="col-sm kanban-status example-container">
         <h3><span class="badge badge-secondary">Inprogress</span></h3>
         <div cdkDropList [cdkDropListData]="inProgress" class="example-list" (cdkDropListDropped)="drop($event)">
-          <div *ngFor="let task of inProgress;">
-            <app-task-card [title]="task.subject"></app-task-card>
+          <div *ngFor="let task of inProgress;" class="pad">
+            <app-task-card [title]="task.subject" [description]="task.description"></app-task-card>
           </div>
         </div>
       </div>
@@ -34,35 +34,12 @@
       <div class="col-sm kanban-status example-container">
         <h3><span class="badge badge-secondary">Done</span></h3>
         <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
-          <div *ngFor="let task of done;">
-            <app-task-card [title]="task.subject"></app-task-card>
+          <div *ngFor="let task of done;" class="pad">
+            <app-task-card [title]="task.subject" [description]="task.description"></app-task-card>
           </div>
         </div>
       </div>
-      <!-- <table class="table">
-    <thead>
-      <tr >
-        <th class="col-sm" scope="col">Blocked</th>
-        <th class="col-sm" scope="col">To do</th>
-        <th class="col-sm" scope="col">In progress</th>
-        <th class="col-sm" scope="col">Done</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="col-sm"><app-task-card></app-task-card></td>
-        <td class="col-sm"><app-task-card></app-task-card></td>
-        <td class="col-sm"><app-task-card></app-task-card></td>
-        <td class="col-sm"><app-task-card></app-task-card></td>
-      </tr>
-      <tr>
-        <td class="col-sm"><app-task-card></app-task-card></td>
-        <td class="col-sm"><app-task-card></app-task-card></td>
-        <td class="col-sm"><app-task-card></app-task-card></td>
-        <td class="col-sm"><app-task-card></app-task-card></td>
-      </tr>
-    </tbody>
-  </table> -->
+
     </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { PostmanService } from '../postman.service';
+import { RoutingService } from '../routing.service';
 import { CreateTaskComponent } from '../create-task/create-task.component';
 
 
@@ -19,6 +20,7 @@ export class KanbanComponent implements OnInit {
   inProgress: object[];
   done: object[];
   constructor(private route: ActivatedRoute, private postmanService: PostmanService,
+              private routingService: RoutingService,
               private snackBar: MatSnackBar,
               public matDialog: MatDialog) { }
 
@@ -32,7 +34,12 @@ export class KanbanComponent implements OnInit {
       this.todo = response.to_do;
       this.inProgress = response.in_progress;
       this.done = response.done;
-    });
+    }, error => {
+      if (error.status === 401){
+        this.routingService.navigateToLogin();
+      }
+    }
+    );
   }
 
   drop(event: CdkDragDrop<string[]>): void {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PostmanService } from '../postman.service'
+import { PostmanService } from '../postman.service';
 
 @Component({
   selector: 'app-task-card',
@@ -13,10 +13,6 @@ export class TaskCardComponent implements OnInit {
 
   constructor(private postmanService: PostmanService) { }
 
-  ngOnInit(): void {
-    
-  }
-
-  
+  ngOnInit(): void { }
 
 }

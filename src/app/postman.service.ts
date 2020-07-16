@@ -27,13 +27,8 @@ export class PostmanService {
 
   createTask(task: object): Observable<any> {
     return this.http.post(
-      'http://localhost:5000/tasks', {
-      subject: task['subject'],
-      status: 1,
-      project_id: 1,
-      user_id: 1
-
-    },
+      'http://localhost:5000/tasks', 
+      task,
       { responseType: 'json' }
     );
   }

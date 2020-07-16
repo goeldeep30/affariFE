@@ -1,10 +1,33 @@
 <h2 mat-dialog-title>Create Task</h2>
 <mat-dialog-content>
-<form #createTaskForm="ngForm" (ngSubmit)="onSubmit(createTaskForm)">
+  <form #createTaskForm="ngForm" (ngSubmit)="onSubmit(createTaskForm)">
+
     <div class="form-group">
       <label for="inputSubject">Subject</label>
       <input type="text" name="subject" class="form-control" id="inputSubject" aria-describedby="subjectHelp" ngModel>
     </div>
-      <button type="submit" class="btn btn-primary" mat-dialog-close>Submit</button>
-</form>
+
+    <div class="form-group">
+      <label for="taDescription">Description</label>
+      <textarea name="description" class="form-control" id="taDescription" rows="3" aria-describedby="descriptionHelp"
+        ngModel></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="inputStatus">Status</label>
+      <input type="text" name="status" class="form-control" id="inputStatus" aria-describedby="statusHelp" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="inputProjectId">Project Id</label>
+      <input type="text" name="project_id" class="form-control" id="inputProjectId" aria-describedby="projectIdHelp" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="inputAssignTo">Assign to</label>
+      <input type="text" name="user_id" class="form-control" id="inputAssignTo" aria-describedby="assignToHelp" ngModel>
+    </div>
+
+    <button type="submit" class="btn btn-primary" mat-dialog-close>Submit</button>
+  </form>
 </mat-dialog-content>
