@@ -16,7 +16,6 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.postmanService.getProjects().subscribe((response) => {
-      // debugger
       this.projects = response.Projects;
     },
       error => {

@@ -33,6 +33,14 @@ export class PostmanService {
     );
   }
 
+  updateTask(task: object): Observable<any> {
+    return this.http.put(
+      'http://localhost:5000/tasks',
+      task,
+      { responseType: 'json' }
+    );
+  }
+
   getAPICheck(): Observable<any> {
     return this.http.get('http://localhost:5000', { responseType: 'json' });
   }

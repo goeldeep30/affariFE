@@ -6,7 +6,7 @@
 
       <div class="col-sm kanban-status example-container">
         <h3><span class="badge badge-secondary">Blocked</span></h3>
-        <div cdkDropList [cdkDropListData]="blocked" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDropList [cdkDropListData]="blocked" [id]="taskStatus.blocked" class="example-list" (cdkDropListDropped)="drop($event)">
           <div *ngFor="let task of blocked;" class="pad">
             <app-task-card [title]="task.subject" [description]="task.description"></app-task-card>
           </div>
@@ -15,7 +15,7 @@
 
       <div class="col-sm kanban-status example-container">
         <h3><span class="badge badge-secondary">To do</span></h3>
-        <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDropList [cdkDropListData]="todo" [id]="taskStatus.todo" class="example-list" (cdkDropListDropped)="drop($event)">
           <div *ngFor="let task of todo;" class="pad">
             <app-task-card [title]="task.subject" [description]="task.description"></app-task-card>
           </div>
@@ -24,7 +24,7 @@
 
       <div class="col-sm kanban-status example-container">
         <h3><span class="badge badge-secondary">Inprogress</span></h3>
-        <div cdkDropList [cdkDropListData]="inProgress" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDropList [cdkDropListData]="inProgress" [id]="taskStatus.inProgress" class="example-list" (cdkDropListDropped)="drop($event)">
           <div *ngFor="let task of inProgress;" class="pad">
             <app-task-card [title]="task.subject" [description]="task.description"></app-task-card>
           </div>
@@ -33,7 +33,7 @@
 
       <div class="col-sm kanban-status example-container">
         <h3><span class="badge badge-secondary">Done</span></h3>
-        <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDropList [cdkDropListData]="done" [id]="taskStatus.done" class="example-list" (cdkDropListDropped)="drop($event)">
           <div *ngFor="let task of done;" class="pad">
             <app-task-card [title]="task.subject" [description]="task.description"></app-task-card>
           </div>
