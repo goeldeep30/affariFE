@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { PostmanService } from '../postman.service';
+import { CreateTaskComponent } from '../create-task/create-task.component';
 
 
 @Component({
@@ -17,13 +19,14 @@ export class KanbanComponent implements OnInit {
   inProgress: object[];
   done: object[];
   constructor(private route: ActivatedRoute, private postmanService: PostmanService,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              public matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.projectId = +this.route.snapshot.paramMap.get('projectid');
     this.updateKanban(this.projectId);
   }
-  private updateKanban(projectId: number): void{
+  private updateKanban(projectId: number): void {
     this.postmanService.getTasks(this.projectId).subscribe((response) => {
       this.blocked = response.blocked;
       this.todo = response.to_do;
@@ -55,7 +58,7 @@ export class KanbanComponent implements OnInit {
     });
   }
 
-  createNewTask(): void{
-    
+  openDialog(): void {
+    this.matDialog.open(CreateTaskComponent);
   }
 }

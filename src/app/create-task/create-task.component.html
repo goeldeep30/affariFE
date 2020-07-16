@@ -1,29 +1,10 @@
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New task</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Subject</label>
-                        <input type="text" name="subjet" class="form-control" id="inputSubject"
-                            aria-describedby="subjectHelp" ngModel>
-                        <!-- <small id="subjectHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small> -->
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
+<h2 mat-dialog-title>Create Task</h2>
+<mat-dialog-content>
+<form #createTaskForm="ngForm" (ngSubmit)="onSubmit(createTaskForm)">
+    <div class="form-group">
+      <label for="inputSubject">Subject</label>
+      <input type="text" name="subject" class="form-control" id="inputSubject" aria-describedby="subjectHelp" ngModel>
     </div>
-</div>
+      <button type="submit" class="btn btn-primary" mat-dialog-close>Submit</button>
+</form>
+</mat-dialog-content>

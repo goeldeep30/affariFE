@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { PostmanService } from '../postman.service';
+import { RoutingService } from '../routing.service';
 
 @Component({
   selector: 'app-create-task',
@@ -13,13 +15,23 @@ export class CreateTaskComponent implements OnInit {
     Validators.required,
   ]);
 
-  constructor() { }
+  constructor(private postmanService: PostmanService,
+              private routingService: RoutingService) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form: NgForm): void{
+  createTask(task: object): void {
+    this.postmanService.createTask(task).subscribe((response) => {
+    }, error => {
+      if (error.status === 401){
+        this.routingService.navigateToLogin();
+      }
+    });
+  }
 
+  onSubmit(form: NgForm): void {
+    this.createTask(form.value);
   }
 }
 

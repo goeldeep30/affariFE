@@ -25,6 +25,19 @@ export class PostmanService {
     return this.http.get(`http://localhost:5000/tasks?project_id=${projectId}`, { responseType: 'json' });
   }
 
+  createTask(task: object): Observable<any> {
+    return this.http.post(
+      'http://localhost:5000/tasks', {
+      subject: task['subject'],
+      status: 1,
+      project_id: 1,
+      user_id: 1
+
+    },
+      { responseType: 'json' }
+    );
+  }
+
   getAPICheck(): Observable<any> {
     return this.http.get('http://localhost:5000', { responseType: 'json' });
   }
@@ -36,6 +49,8 @@ export class PostmanService {
       { responseType: 'json' }
     );
   }
+
+
 
 
 

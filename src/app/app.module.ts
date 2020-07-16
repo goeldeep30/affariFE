@@ -37,6 +37,7 @@ import { CreateTaskComponent } from './create-task/create-task.component';
     ProjectsComponent,
     CreateTaskComponent
   ],
+  entryComponents: [CreateTaskComponent],
   imports: [
     BrowserModule,
     CommonModule,
