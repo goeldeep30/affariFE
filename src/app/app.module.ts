@@ -35,7 +35,7 @@ import { CreateTaskComponent } from './create-task/create-task.component';
     TaskCardComponent,
     SideNavComponent,
     ProjectsComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
   ],
   entryComponents: [CreateTaskComponent],
   imports: [

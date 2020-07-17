@@ -25,12 +25,12 @@ export class KanbanComponent implements OnInit {
     todo: TaskStatus.TODO,
     inProgress: TaskStatus.INPROGRESS,
     done: TaskStatus.DONE
-  }
+  };
 
   constructor(private route: ActivatedRoute, private postmanService: PostmanService,
-    private routingService: RoutingService,
-    private snackBar: MatSnackBar,
-    public matDialog: MatDialog) { }
+              private routingService: RoutingService,
+              private snackBar: MatSnackBar,
+              public matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.projectId = +this.route.snapshot.paramMap.get('projectid');
