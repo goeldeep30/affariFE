@@ -85,6 +85,10 @@ export class KanbanComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.matDialog.open(CreateTaskComponent);
+    this.matDialog.open(CreateTaskComponent, {
+      // height: '400px',
+      width: '600px',
+      data: { projectId: this.projectId },
+    });
   }
 }

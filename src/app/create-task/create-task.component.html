@@ -15,17 +15,21 @@
 
     <div class="form-group">
       <label for="inputStatus">Status</label>
-      <input type="text" name="status" class="form-control" id="inputStatus" aria-describedby="statusHelp" ngModel>
+      <!-- <input type="hidden" name="status" class="form-control" aria-describedby="statusHelp" [ngModel]="selectedTaskStatus"> -->
+      <p-dropdown [options]="TaskStatus" id="inputStatus" name="status" [(ngModel)]="selectedTaskStatus"></p-dropdown>
     </div>
 
     <div class="form-group">
-      <label for="inputProjectId">Project Id</label>
-      <input type="text" name="project_id" class="form-control" id="inputProjectId" aria-describedby="projectIdHelp" ngModel>
+      <!-- <label for="inputProjectId">Project Id</label> -->
+      <input type="hidden" name="project_id" class="form-control" id="inputProjectId" aria-describedby="projectIdHelp"
+        [ngModel]="data.projectId">
     </div>
 
     <div class="form-group">
       <label for="inputAssignTo">Assign to</label>
-      <input type="text" name="user_id" class="form-control" id="inputAssignTo" aria-describedby="assignToHelp" ngModel>
+      <!-- <input type="text" name="user_id" class="form-control" id="inputAssignTo" aria-describedby="assignToHelp" ngModel> -->
+      <p-dropdown [options]="projectMembers" id="inputAssignTo" name="user_id" [(ngModel)]="selectedMemberId"
+        [filter]="true"></p-dropdown>
     </div>
 
     <button type="submit" class="btn btn-primary" mat-dialog-close>Submit</button>

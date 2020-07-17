@@ -21,6 +21,10 @@ export class PostmanService {
     return this.http.get('http://localhost:5000/projects', { responseType: 'json' });
   }
 
+  getProjectMembers(projectId: number): Observable<any> {
+    return this.http.get(`http://localhost:5000/project_members/${projectId}`, { responseType: 'json' });
+  }
+
   getTasks(projectId: number): Observable<any> {
     return this.http.get(`http://localhost:5000/tasks?project_id=${projectId}`, { responseType: 'json' });
   }
