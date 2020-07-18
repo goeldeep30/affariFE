@@ -57,12 +57,24 @@ export class PostmanService {
     return this.http.get('http://localhost:5000', { responseType: 'json' });
   }
 
+  createUser(user: object): Observable<any> {
+    return this.http.post(
+      'http://localhost:5000/register',
+      user,
+      { responseType: 'json' }
+    );
+  }
+
   getAuthToken(credentials: object): Observable<any> {
     return this.http.post(
       'http://localhost:5000/login',
       credentials,
       { responseType: 'json' }
     );
+  }
+
+  userLogout(): Observable<any> {
+    return this.http.delete('http://localhost:5000/logout', { responseType: 'json' });
   }
 
 

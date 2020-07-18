@@ -25,6 +25,7 @@ import { TokenIntercepterService } from './token-intercepter.service';
 import { AuthGuard } from './auth.guard';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { CreateProjectComponent } from './create-project/create-project.componen
     ProjectsComponent,
     CreateTaskComponent,
     CreateProjectComponent,
+    SignupComponent,
   ],
   entryComponents: [
     CreateTaskComponent,
