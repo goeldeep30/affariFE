@@ -13,6 +13,6 @@
         ngModel></textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary" mat-dialog-close>Submit</button>
+    <button type="submit" class="btn btn-primary" mat-dialog-close [disabled]="!createProjectForm.valid">Submit</button>
   </form>
 </mat-dialog-content>

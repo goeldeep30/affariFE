@@ -28,10 +28,9 @@
     <div class="form-group">
       <label for="inputAssignTo">Assign to</label>
       <!-- <input type="text" name="user_id" class="form-control" id="inputAssignTo" aria-describedby="assignToHelp" ngModel> -->
-      <p-dropdown required [options]="projectMembers" id="inputAssignTo" name="user_id" [(ngModel)]="selectedMemberId"
-        [filter]="true"></p-dropdown>
+      <p-dropdown required [options]="projectMembers" id="inputAssignTo" name="user_id" [(ngModel)]="selectedMemberId"></p-dropdown>
     </div>
 
-    <button type="submit" class="btn btn-primary" mat-dialog-close>Submit</button>
+    <button type="submit" class="btn btn-primary" mat-dialog-close [disabled]="!createTaskForm.valid">Submit</button>
   </form>
 </mat-dialog-content>

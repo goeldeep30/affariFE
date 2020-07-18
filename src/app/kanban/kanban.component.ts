@@ -7,6 +7,7 @@ import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
 import { CreateTaskComponent } from '../create-task/create-task.component';
 import { TaskStatus } from '../enums';
+import { UtilityService } from '../utility.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class KanbanComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private postmanService: PostmanService,
               private routingService: RoutingService,
+              private utilityService: UtilityService,
               private snackBar: MatSnackBar,
               public matDialog: MatDialog) { }
 
@@ -38,10 +40,16 @@ export class KanbanComponent implements OnInit {
   }
   private updateKanban(projectId: number): void {
     this.postmanService.getTasks(this.projectId).subscribe((response) => {
-      this.blocked = response.blocked;
-      this.todo = response.to_do;
-      this.inProgress = response.in_progress;
-      this.done = response.done;
+      if ((response.blocked.length + response.to_do.length
+        + response.in_progress.length + response.done.length) > 0){
+          this.blocked = response.blocked;
+          this.todo = response.to_do;
+          this.inProgress = response.in_progress;
+          this.done = response.done;
+        }
+        else{
+          this.utilityService.openInfoDialog('Info', 'No data to present');
+        }
     }, error => {
       if (error.status === 401) {
         this.routingService.navigateToLogin();

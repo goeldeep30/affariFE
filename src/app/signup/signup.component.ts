@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
+import { UtilityService } from '../utility.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +12,8 @@ import { RoutingService } from '../routing.service';
 export class SignupComponent implements OnInit {
 
   constructor(private postmanService: PostmanService,
-              private routingService: RoutingService) { }
+              private routingService: RoutingService,
+              private utilityService: UtilityService) { }
 
   ngOnInit(): void {
   }
@@ -20,11 +22,18 @@ export class SignupComponent implements OnInit {
     this.postmanService.createUser(user).subscribe((response) => {
       // localStorage.setItem('user', JSON.stringify(response));
       this.routingService.navigateToLogin();
+    }, error => {
+      this.utilityService.openInfoDialog('Error', JSON.stringify(error));
     });
   }
 
   onSubmit(form: NgForm): void {
-    this.createUser(form.value);
+    if (form.valid){
+      this.createUser(form.value);
+    }
+    else{
+      this.utilityService.openInfoDialog('Error', 'Enter form details correctly');
+    }
   }
 
 }

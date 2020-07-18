@@ -1,22 +1,26 @@
-<div class="container">
-    <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
-      <div class="form-group">
-        <label for="inputEmail">Email address</label>
-        <input type="email" name="username" class="form-control" id="inputEmail" aria-describedby="emailHelp" ngModel>
-        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-      </div>
+<div class="container h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-10 col-md-8 col-lg-6 form-resize">
+      <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input required type="email" name="username" class="form-control" id="inputEmail" aria-describedby="emailHelp"
+            ngModel>
+          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        </div>
 
-      <div class="form-group">
-        <label for="inputPassword">Password</label>
-        <input type="password" name="password" class="form-control" id="inputPassword" ngModel>
-      </div>
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input required type="password" name="password" class="form-control" id="inputPassword" ngModel>
+        </div>
 
-      <div class="form-group">
-        <label for="inputAccessLevel">Access Level</label>
-        <input type="text" name="access_level" class="form-control" id="inputAccessLevel" ngModel>
-      </div>
+        <div class="form-group">
+          <label for="inputAccessLevel">Access Level</label>
+          <input required type="text" name="access_level" class="form-control" id="inputAccessLevel" ngModel>
+        </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
   </div>
-  
+</div>
