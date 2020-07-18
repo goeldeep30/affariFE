@@ -31,7 +31,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    this.authoriseMe(form.value);
+    if (form.valid){
+      this.authoriseMe(form.value);
+    }
   }
 
 }

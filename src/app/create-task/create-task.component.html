@@ -4,12 +4,12 @@
 
     <div class="form-group">
       <label for="inputSubject">Subject</label>
-      <input type="text" name="subject" class="form-control" id="inputSubject" aria-describedby="subjectHelp" ngModel>
+      <input required type="text" name="subject" class="form-control" id="inputSubject" aria-describedby="subjectHelp" ngModel>
     </div>
 
     <div class="form-group">
       <label for="taDescription">Description</label>
-      <textarea name="description" class="form-control" id="taDescription" rows="3" aria-describedby="descriptionHelp"
+      <textarea required name="description" class="form-control" id="taDescription" rows="3" aria-describedby="descriptionHelp"
         ngModel></textarea>
     </div>
 
@@ -28,7 +28,7 @@
     <div class="form-group">
       <label for="inputAssignTo">Assign to</label>
       <!-- <input type="text" name="user_id" class="form-control" id="inputAssignTo" aria-describedby="assignToHelp" ngModel> -->
-      <p-dropdown [options]="projectMembers" id="inputAssignTo" name="user_id" [(ngModel)]="selectedMemberId"
+      <p-dropdown required [options]="projectMembers" id="inputAssignTo" name="user_id" [(ngModel)]="selectedMemberId"
         [filter]="true"></p-dropdown>
     </div>
 

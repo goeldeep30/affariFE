@@ -26,6 +26,7 @@ import { AuthGuard } from './auth.guard';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { SignupComponent } from './signup/signup.component';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 
 @NgModule({
@@ -40,10 +41,12 @@ import { SignupComponent } from './signup/signup.component';
     CreateTaskComponent,
     CreateProjectComponent,
     SignupComponent,
+    InfoDialogComponent,
   ],
   entryComponents: [
     CreateTaskComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    InfoDialogComponent,
   ],
   imports: [
     BrowserModule,

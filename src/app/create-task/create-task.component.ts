@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
+import { UtilityService } from '../utility.service';
 import { SelectItem } from 'primeng/api';
 import { TaskStatus } from '../enums';
 
@@ -23,6 +24,7 @@ export class CreateTaskComponent implements OnInit {
 
   constructor(private postmanService: PostmanService,
               private routingService: RoutingService,
+              private utilityService: UtilityService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
@@ -36,9 +38,7 @@ export class CreateTaskComponent implements OnInit {
     this.postmanService.getProjectMembers(this.data.projectId).subscribe((response: any) => {
       for (const member of response.members) {
         this.projectMembers.push({ label: member.username, value: member.id });
-        // this.projectMembers.push('hhh');
       }
-      console.log(this.projectMembers);
     });
   }
 
@@ -48,11 +48,17 @@ export class CreateTaskComponent implements OnInit {
       if (error.status === 401) {
         this.routingService.navigateToLogin();
       }
+      this.utilityService.openInfoDialog('Error', error);
     });
   }
 
   onSubmit(form: NgForm): void {
-    this.createTask(form.value);
+    if (form.valid){
+      this.createTask(form.value);
+    }
+    else{
+      this.utilityService.openInfoDialog('Error', 'Please fill form correctly');
+    }
   }
 }
 
