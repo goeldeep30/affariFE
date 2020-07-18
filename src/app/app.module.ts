@@ -24,6 +24,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { TokenIntercepterService } from './token-intercepter.service';
 import { AuthGuard } from './auth.guard';
 import { CreateTaskComponent } from './create-task/create-task.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 
 @NgModule({
@@ -36,8 +37,12 @@ import { CreateTaskComponent } from './create-task/create-task.component';
     SideNavComponent,
     ProjectsComponent,
     CreateTaskComponent,
+    CreateProjectComponent,
   ],
-  entryComponents: [CreateTaskComponent],
+  entryComponents: [
+    CreateTaskComponent,
+    CreateProjectComponent
+  ],
   imports: [
     BrowserModule,
     CommonModule,

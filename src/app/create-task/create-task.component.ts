@@ -14,7 +14,7 @@ import { TaskStatus } from '../enums';
 })
 export class CreateTaskComponent implements OnInit {
   TaskStatus: SelectItem[];
-  selectedTaskStatus: number = 1; // Default value to prevent error on data bindong on component init
+  selectedTaskStatus = 1; // Default value to prevent error on data bindong on component init
   projectMembers: any[] = [];
   selectedMemberId: number = null;
   taskFormControl = new FormControl('', [
@@ -22,8 +22,8 @@ export class CreateTaskComponent implements OnInit {
   ]);
 
   constructor(private postmanService: PostmanService,
-    private routingService: RoutingService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+              private routingService: RoutingService,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.TaskStatus = [

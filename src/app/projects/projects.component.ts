@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
+import { CreateProjectComponent } from '../create-project/create-project.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -12,7 +14,8 @@ export class ProjectsComponent implements OnInit {
   projects: object;
 
   constructor(private routingService: RoutingService,
-              private postmanService: PostmanService) { }
+              private postmanService: PostmanService,
+              public matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.postmanService.getProjects().subscribe((response) => {
@@ -29,4 +32,11 @@ export class ProjectsComponent implements OnInit {
     this.routingService.navigateToKanban(projectId);
   }
 
+  openDialog(): void {
+    this.matDialog.open(CreateProjectComponent, {
+      // height: '400px',
+      width: '600px',
+      // data: { projectId: this.projectId },
+    });
+  }
 }
