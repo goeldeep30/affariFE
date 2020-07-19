@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PostmanService {
+  localURL = 'http://localhost:5000';
+  herokuURL = 'https://affari.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 
@@ -13,33 +15,29 @@ export class PostmanService {
     alert('I am demo func from PM sevice');
   }
 
-  getTodos(): Observable<any> {
-    return this.http.get('https://be087e9a6f56.ngrok.io', { responseType: 'json' });
-  }
-
   getProjects(): Observable<any> {
-    return this.http.get('http://localhost:5000/projects', { responseType: 'json' });
+    return this.http.get(this.herokuURL + '/projects', { responseType: 'json' });
   }
 
   getProjectMembers(projectId: number): Observable<any> {
-    return this.http.get(`http://localhost:5000/project_members/${projectId}`, { responseType: 'json' });
+    return this.http.get(this.herokuURL + `/project_members/${projectId}`, { responseType: 'json' });
   }
 
   createProject(project: object): Observable<any> {
     return this.http.post(
-      'http://localhost:5000/projects',
+      this.herokuURL + '/projects',
       project,
       { responseType: 'json' }
     );
   }
 
   getTasks(projectId: number): Observable<any> {
-    return this.http.get(`http://localhost:5000/tasks?project_id=${projectId}`, { responseType: 'json' });
+    return this.http.get(this.herokuURL + `/tasks?project_id=${projectId}`, { responseType: 'json' });
   }
 
   createTask(task: object): Observable<any> {
     return this.http.post(
-      'http://localhost:5000/tasks', 
+      this.herokuURL + '/tasks',
       task,
       { responseType: 'json' }
     );
@@ -47,19 +45,19 @@ export class PostmanService {
 
   updateTask(task: object): Observable<any> {
     return this.http.put(
-      'http://localhost:5000/tasks',
+      this.herokuURL + '/tasks',
       task,
       { responseType: 'json' }
     );
   }
 
   getAPICheck(): Observable<any> {
-    return this.http.get('http://localhost:5000', { responseType: 'json' });
+    return this.http.get(this.herokuURL, { responseType: 'json' });
   }
 
   createUser(user: object): Observable<any> {
     return this.http.post(
-      'http://localhost:5000/register',
+      this.herokuURL + '/register',
       user,
       { responseType: 'json' }
     );
@@ -67,14 +65,14 @@ export class PostmanService {
 
   getAuthToken(credentials: object): Observable<any> {
     return this.http.post(
-      'http://localhost:5000/login',
+      this.herokuURL + '/login',
       credentials,
       { responseType: 'json' }
     );
   }
 
   userLogout(): Observable<any> {
-    return this.http.delete('http://localhost:5000/logout', { responseType: 'json' });
+    return this.http.delete(this.herokuURL + '/logout', { responseType: 'json' });
   }
 
 
