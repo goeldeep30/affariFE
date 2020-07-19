@@ -11,14 +11,15 @@ export class AppComponent implements OnInit {
   events: string[] = [];
   sCheck = '';
   constructor(private postmanService: PostmanService,
-              private routingService: RoutingService) { }
+              private routingService: RoutingService) {
+                // this.routingService.navigateToProjects();
+              }
 
   ngOnInit(): void {
     this.sCheck = 'Error: Can not reach server';
     this.postmanService.getAPICheck().subscribe((response) => {
       this.sCheck = response['msg'];
     });
-    this.routingService.navigateToProjects();
   }
 }
 
