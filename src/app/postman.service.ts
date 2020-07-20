@@ -1,43 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MyURL } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostmanService {
-  localURL = 'http://localhost:5000';
-  herokuURL = 'https://affari.herokuapp.com';
+  private URL: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // this.URL = MyURL.local;
+    this.URL = MyURL.heroku;
+  }
 
   demo(): void {
     alert('I am demo func from PM sevice');
   }
 
   getProjects(): Observable<any> {
-    return this.http.get(this.herokuURL + '/projects', { responseType: 'json' });
+    return this.http.get(this.URL + '/projects', { responseType: 'json' });
   }
 
   getProjectMembers(projectId: number): Observable<any> {
-    return this.http.get(this.herokuURL + `/project_members/${projectId}`, { responseType: 'json' });
+    return this.http.get(this.URL + `/project_members/${projectId}`, { responseType: 'json' });
   }
 
   createProject(project: object): Observable<any> {
     return this.http.post(
-      this.herokuURL + '/projects',
+      this.URL + '/projects',
       project,
       { responseType: 'json' }
     );
   }
 
   getTasks(projectId: number): Observable<any> {
-    return this.http.get(this.herokuURL + `/tasks?project_id=${projectId}`, { responseType: 'json' });
+    return this.http.get(this.URL + `/tasks?project_id=${projectId}`, { responseType: 'json' });
   }
 
   createTask(task: object): Observable<any> {
     return this.http.post(
-      this.herokuURL + '/tasks',
+      this.URL + '/tasks',
       task,
       { responseType: 'json' }
     );
@@ -45,19 +48,19 @@ export class PostmanService {
 
   updateTask(task: object): Observable<any> {
     return this.http.put(
-      this.herokuURL + '/tasks',
+      this.URL + '/tasks',
       task,
       { responseType: 'json' }
     );
   }
 
   getAPICheck(): Observable<any> {
-    return this.http.get(this.herokuURL, { responseType: 'json' });
+    return this.http.get(this.URL, { responseType: 'json' });
   }
 
   createUser(user: object): Observable<any> {
     return this.http.post(
-      this.herokuURL + '/register',
+      this.URL + '/register',
       user,
       { responseType: 'json' }
     );
@@ -65,14 +68,14 @@ export class PostmanService {
 
   getAuthToken(credentials: object): Observable<any> {
     return this.http.post(
-      this.herokuURL + '/login',
+      this.URL + '/login',
       credentials,
       { responseType: 'json' }
     );
   }
 
   userLogout(): Observable<any> {
-    return this.http.delete(this.herokuURL + '/logout', { responseType: 'json' });
+    return this.http.delete(this.URL + '/logout', { responseType: 'json' });
   }
 
 
