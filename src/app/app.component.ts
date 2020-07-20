@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private postmanService: PostmanService,
               private routingService: RoutingService) {
                 // this.routingService.navigateToProjects();
+                // alert("app.comp.constructor")
               }
 
   ngOnInit(): void {

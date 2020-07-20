@@ -41,15 +41,15 @@ export class KanbanComponent implements OnInit {
   private updateKanban(projectId: number): void {
     this.postmanService.getTasks(this.projectId).subscribe((response) => {
       if ((response.blocked.length + response.to_do.length
-        + response.in_progress.length + response.done.length) > 0){
-          this.blocked = response.blocked;
-          this.todo = response.to_do;
-          this.inProgress = response.in_progress;
-          this.done = response.done;
-        }
-        else{
-          this.utilityService.openInfoDialog('Info', 'No data to present');
-        }
+        + response.in_progress.length + response.done.length) > 0) {
+        this.blocked = response.blocked;
+        this.todo = response.to_do;
+        this.inProgress = response.in_progress;
+        this.done = response.done;
+      }
+      else {
+        this.utilityService.openInfoDialog('Info', 'No data to present');
+      }
     }, error => {
       if (error.status === 401) {
         this.routingService.navigateToLogin();
@@ -97,6 +97,8 @@ export class KanbanComponent implements OnInit {
       // height: '400px',
       width: '600px',
       data: { projectId: this.projectId },
+    }).afterClosed().subscribe(() => {
+      this.updateKanban(this.projectId);
     });
   }
 }

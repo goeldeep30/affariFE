@@ -15,7 +15,7 @@ import { TaskStatus } from '../enums';
 })
 export class CreateTaskComponent implements OnInit {
   TaskStatus: SelectItem[];
-  selectedTaskStatus = 1; // Default value to prevent error on data bindong on component init
+  selectedTaskStatus = TaskStatus.TODO; // Default value to prevent error on data bindong on component init
   projectMembers: any[] = [];
   selectedMemberId: number = null;
   taskFormControl = new FormControl('', [
@@ -39,6 +39,7 @@ export class CreateTaskComponent implements OnInit {
       for (const member of response.members) {
         this.projectMembers.push({ label: member.username, value: member.id });
       }
+      this.selectedMemberId = response.members[0].id;
     });
   }
 

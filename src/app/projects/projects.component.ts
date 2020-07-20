@@ -15,14 +15,18 @@ export class ProjectsComponent implements OnInit {
 
   constructor(private routingService: RoutingService,
               private postmanService: PostmanService,
-              public matDialog: MatDialog) { }
+              private matDialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.updateProjects();
+  }
+
+  private updateProjects(): void {
     this.postmanService.getProjects().subscribe((response) => {
       this.projects = response.Projects;
     },
       error => {
-        if (error.status === 401){
+        if (error.status === 401) {
           this.routingService.navigateToLogin();
         }
       });
@@ -37,6 +41,8 @@ export class ProjectsComponent implements OnInit {
       // height: '400px',
       width: '600px',
       // data: { projectId: this.projectId },
+    }).afterClosed().subscribe(() => {
+      this.updateProjects();
     });
   }
 }

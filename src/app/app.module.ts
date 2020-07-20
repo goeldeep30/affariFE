@@ -27,6 +27,7 @@ import { CreateTaskComponent } from './create-task/create-task.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { SignupComponent } from './signup/signup.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { ProjectCardComponent } from './project-card/project-card.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
     CreateProjectComponent,
     SignupComponent,
     InfoDialogComponent,
+    ProjectCardComponent,
   ],
   entryComponents: [
     CreateTaskComponent,

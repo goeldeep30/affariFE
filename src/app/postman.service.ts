@@ -10,8 +10,8 @@ export class PostmanService {
   private URL: string;
 
   constructor(private http: HttpClient) {
-    // this.URL = MyURL.local;
-    this.URL = MyURL.heroku;
+    this.URL = MyURL.local;
+    // this.URL = MyURL.heroku;
   }
 
   demo(): void {
