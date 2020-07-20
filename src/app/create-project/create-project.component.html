@@ -4,13 +4,31 @@
 
     <div class="form-group">
       <label for="inputSubject">Name</label>
-      <input required type="text" name="project_name" class="form-control" id="inputSubject" aria-describedby="subjectHelp" ngModel>
+      <input required type="text" name="project_name" class="form-control" id="inputSubject"
+        aria-describedby="subjectHelp" ngModel>
     </div>
 
     <div class="form-group">
       <label for="taDescription">Description</label>
-      <textarea required name="project_desc" class="form-control" id="taDescription" rows="3" aria-describedby="descriptionHelp"
-        ngModel></textarea>
+      <textarea required name="project_desc" class="form-control" id="taDescription" rows="3"
+        aria-describedby="descriptionHelp" ngModel></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="inputMembers">Add members</label>
+      <input type="hidden" name="project_members" class="form-control" [(ngModel)]="members">
+      <!-- <mat-form-field class="chip-list"> -->
+      <mat-chip-list #chipList aria-label="Members selection" id="inputMembers">
+        <mat-chip *ngFor="let member of members" [selectable]="selectable" [removable]="removable"
+          (removed)="remove(fruit)">
+          {{member.username}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="New member..." [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+    <!-- </mat-form-field> -->
     </div>
 
     <button type="submit" class="btn btn-primary" mat-dialog-close [disabled]="!createProjectForm.valid">Submit</button>
