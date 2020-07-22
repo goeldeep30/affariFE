@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PostmanService } from '../postman.service';
+import { PostmanService } from '../../postman.service';
 
 @Component({
   selector: 'app-task-card',

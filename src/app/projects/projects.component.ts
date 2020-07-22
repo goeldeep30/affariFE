@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
-import { CreateProjectComponent } from '../create-project/create-project.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 import { MatDialog } from '@angular/material/dialog';
 
 

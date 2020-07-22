@@ -17,17 +17,17 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { KanbanComponent } from './kanban/kanban.component';
+import { TaskCardComponent } from './kanban/task-card/task-card.component';
+import { CreateTaskComponent } from './kanban/create-task/create-task.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { TaskCardComponent } from './task-card/task-card.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ProjectCardComponent } from './projects/project-card/project-card.component';
+import { CreateProjectComponent } from './projects/create-project/create-project.component';
 import { TokenIntercepterService } from './token-intercepter.service';
 import { AuthGuard } from './auth.guard';
-import { CreateTaskComponent } from './create-task/create-task.component';
-import { CreateProjectComponent } from './create-project/create-project.component';
 import { SignupComponent } from './signup/signup.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
-import { ProjectCardComponent } from './project-card/project-card.component';
 
 
 @NgModule({

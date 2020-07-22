@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
-import { CreateTaskComponent } from '../create-task/create-task.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
 import { TaskStatus } from '../enums';
 import { UtilityService } from '../utility.service';
 
@@ -36,9 +36,9 @@ export class KanbanComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectId = +this.route.snapshot.paramMap.get('projectid');
-    this.updateKanban(this.projectId);
+    this.updateKanban();
   }
-  private updateKanban(projectId: number): void {
+  private updateKanban(): void {
     this.postmanService.getTasks(this.projectId).subscribe((response) => {
       if ((response.blocked.length + response.to_do.length
         + response.in_progress.length + response.done.length) > 0) {
@@ -87,7 +87,7 @@ export class KanbanComponent implements OnInit {
       duration: 5000,
     }).onAction().subscribe(() => {
       console.log('Action taken on snackbar');
-      this.updateKanban(this.projectId);
+      this.updateKanban();
 
     });
   }
@@ -98,7 +98,7 @@ export class KanbanComponent implements OnInit {
       width: '600px',
       data: { projectId: this.projectId },
     }).afterClosed().subscribe(() => {
-      this.updateKanban(this.projectId);
+      this.updateKanban();
     });
   }
 }

@@ -6,9 +6,9 @@ export interface Member {
   username: string;
 }
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { PostmanService } from '../postman.service';
-import { RoutingService } from '../routing.service';
-import { UtilityService } from '../utility.service';
+import { PostmanService } from '../../postman.service';
+import { RoutingService } from '../../routing.service';
+import { UtilityService } from '../../utility.service';
 
 @Component({
   selector: 'app-create-project',

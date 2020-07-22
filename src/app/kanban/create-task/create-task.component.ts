@@ -2,11 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { PostmanService } from '../postman.service';
-import { RoutingService } from '../routing.service';
-import { UtilityService } from '../utility.service';
+import { PostmanService } from '../../postman.service';
+import { RoutingService } from '../../routing.service';
+import { UtilityService } from '../../utility.service';
 import { SelectItem } from 'primeng/api';
-import { TaskStatus } from '../enums';
+import { TaskStatus } from '../../enums';
 
 @Component({
   selector: 'app-create-task',
