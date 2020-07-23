@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MyURL } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +9,8 @@ export class PostmanService {
   private URL: string;
 
   constructor(private http: HttpClient) {
-    this.URL = MyURL.local;
-    // this.URL = MyURL.heroku;
+    // this.URL = 'http://localhost:5000';
+    this.URL = 'https://affari.herokuapp.com';
   }
 
   demo(): void {

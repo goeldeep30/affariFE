@@ -6,10 +6,6 @@ export const environment = {
   production: false
 };
 
-export const MyURL = {
-  local: 'http://localhost:5000',
-  heroku: 'https://affari.herokuapp.com'
-};
 
 /*
  * For easier debugging in development mode, you can import the following file
