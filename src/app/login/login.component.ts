@@ -36,6 +36,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  navigateToSignUp(): void{
+    this.routingService.navigateToSignUp();
+  }
+
 }
 
 

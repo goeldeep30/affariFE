@@ -36,4 +36,8 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  navigateToLogin(): void{
+    this.routingService.navigateToLogin();
+  }
+
 }
