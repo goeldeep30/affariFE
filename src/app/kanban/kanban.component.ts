@@ -8,6 +8,7 @@ import { RoutingService } from '../routing.service';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { TaskStatus } from '../enums';
 import { UtilityService } from '../utility.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { UtilityService } from '../utility.service';
   styleUrls: ['./kanban.component.scss']
 })
 export class KanbanComponent implements OnInit {
+  subscription: Subscription;
   private projectId: number;
   blocked: object[];
   todo: object[];
@@ -37,7 +39,16 @@ export class KanbanComponent implements OnInit {
   ngOnInit(): void {
     this.projectId = +this.route.snapshot.paramMap.get('projectid');
     this.updateKanban();
+    this.subscription = this.utilityService.getMessage().subscribe(message => {
+      if (message) {
+        this.updateKanban();
+      }
+      });
   }
+  onDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   private updateKanban(): void {
     this.postmanService.getTasks(this.projectId).subscribe((response) => {
       if ((response.blocked.length + response.to_do.length
@@ -98,7 +109,7 @@ export class KanbanComponent implements OnInit {
       width: '600px',
       data: { projectId: this.projectId },
     }).afterClosed().subscribe(() => {
-      this.updateKanban();
+      // this.updateKanban();
     });
   }
 }

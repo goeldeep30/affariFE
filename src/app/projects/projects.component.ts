@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
+import { UtilityService } from '../utility.service';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,16 +14,23 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ProjectsComponent implements OnInit {
   projects: object;
+  subscription: Subscription;
 
   constructor(private routingService: RoutingService,
               private postmanService: PostmanService,
+              private utilityService: UtilityService,
               private matDialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.updateProjects();
+    this.getProjects();
+    this.subscription = this.utilityService.getMessage().subscribe(message => {
+      if (message) {
+        this.getProjects();
+      }
+      });
   }
 
-  private updateProjects(): void {
+  private getProjects(): void {
     this.postmanService.getProjects().subscribe((response) => {
       this.projects = response.Projects;
     },
@@ -32,6 +41,21 @@ export class ProjectsComponent implements OnInit {
       });
   }
 
+  // private updateProjects(): void {
+  //   this.subscription = this.postmanService.getMessage().subscribe(message => {
+  //       this.getProjects();
+  //       },
+  //         error => {
+  //           if (error.status === 401) {
+  //             this.routingService.navigateToLogin();
+  //           }
+  //         });
+  // }
+
+  onDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   onSelect(projectId: number): void {
     this.routingService.navigateToKanban(projectId);
   }
@@ -40,9 +64,9 @@ export class ProjectsComponent implements OnInit {
     this.matDialog.open(CreateProjectComponent, {
       // height: '400px',
       width: '600px',
-      // data: { projectId: this.projectId },
+      //  data: { projects: this.projects },
     }).afterClosed().subscribe(() => {
-      this.updateProjects();
+      // this.getProjects();
     });
   }
 }

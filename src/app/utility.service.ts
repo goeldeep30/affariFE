@@ -3,13 +3,14 @@ import { PostmanService } from './postman.service';
 import { RoutingService } from './routing.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component'
-
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilityService {
 
+  private subject = new Subject<any>();
   constructor(private postmanService: PostmanService,
               private routingService: RoutingService,
               private matDialog: MatDialog) { }
@@ -46,5 +47,13 @@ export class UtilityService {
       // width: '600px',
       data: { heading, msg },
     });
+  }
+
+  public sendMessage(created: boolean): void {
+    this.subject.next({ text: created });
+  }
+
+  public getMessage(): Observable<any> {
+    return this.subject.asObservable();
   }
 }

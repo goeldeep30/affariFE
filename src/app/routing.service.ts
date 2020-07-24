@@ -8,6 +8,10 @@ export class RoutingService {
 
   constructor(private router: Router) { }
 
+  public navigateToSignUp(): void{
+    this.router.navigate(['signup']);
+  }
+
   public navigateToLogin(): void{
     this.router.navigate(['login']);
   }

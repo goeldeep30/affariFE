@@ -45,6 +45,7 @@ export class CreateTaskComponent implements OnInit {
 
   createTask(task: object): void {
     this.postmanService.createTask(task).subscribe((response) => {
+      this.utilityService.sendMessage(true);
     }, error => {
       if (error.status === 401) {
         this.routingService.navigateToLogin();
