@@ -28,6 +28,7 @@ import { TokenIntercepterService } from './token-intercepter.service';
 import { AuthGuard } from './auth.guard';
 import { SignupComponent } from './signup/signup.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
     SignupComponent,
     InfoDialogComponent,
     ProjectCardComponent,
+    HomeComponent,
   ],
   entryComponents: [
     CreateTaskComponent,
