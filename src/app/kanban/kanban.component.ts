@@ -84,7 +84,6 @@ export class KanbanComponent implements OnInit {
           error => {
             this.utilityService.openInfoDialog('Error', error);
           }
-
         );
 
       this.openSnackBar('Somethin is changed', 'refresh');
@@ -106,8 +105,7 @@ export class KanbanComponent implements OnInit {
       // height: '400px',
       width: '600px',
       data: { projectId: this.projectId },
-    }).afterClosed().subscribe(() => {
-      // this.updateKanban();
     });
   }
+
 }
