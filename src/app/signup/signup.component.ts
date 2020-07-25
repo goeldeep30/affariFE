@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
       // localStorage.setItem('user', JSON.stringify(response));
       this.routingService.navigateToLogin();
     }, error => {
-      this.utilityService.openInfoDialog('Error', JSON.stringify(error));
+      this.utilityService.openInfoDialog('Error', 'Unable to create user, Please try again...');
     });
   }
 

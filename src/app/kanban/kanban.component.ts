@@ -62,9 +62,7 @@ export class KanbanComponent implements OnInit {
         this.utilityService.openInfoDialog('Info', 'No data to present');
       }
     }, error => {
-      if (error.status === 401) {
-        this.routingService.navigateToLogin();
-      }
+      this.utilityService.openInfoDialog('Error', error);
     }
     );
   }
@@ -84,7 +82,7 @@ export class KanbanComponent implements OnInit {
           task = null;
         },
           error => {
-
+            this.utilityService.openInfoDialog('Error', error);
           }
 
         );

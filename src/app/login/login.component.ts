@@ -3,6 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { ErrorStateMatcher } from '@angular/material/core';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
+import { UtilityService } from '../utility.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
   constructor(private postmanService: PostmanService,
-              private routingService: RoutingService) { }
+              private routingService: RoutingService,
+              private utilityService: UtilityService) { }
 
   ngOnInit(): void { }
 
@@ -27,6 +29,8 @@ export class LoginComponent implements OnInit {
     this.postmanService.getAuthToken(credentials).subscribe((response) => {
       localStorage.setItem('user', JSON.stringify(response));
       this.routingService.navigateToProjects();
+    }, error => {
+      this.utilityService.openInfoDialog('Error', error);
     });
   }
 

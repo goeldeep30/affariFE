@@ -31,9 +31,6 @@ export class CreateProjectComponent {
     this.postmanService.createProject(project).subscribe((response) => {
       this.utilityService.sendMessage(true);
     }, error => {
-      if (error.status === 401) {
-        this.routingService.navigateToLogin();
-      }
       this.utilityService.openInfoDialog('Error', error);
     });
   }

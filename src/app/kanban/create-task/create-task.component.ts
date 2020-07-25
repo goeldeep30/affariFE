@@ -40,6 +40,8 @@ export class CreateTaskComponent implements OnInit {
         this.projectMembers.push({ label: member.username, value: member.id });
       }
       this.selectedMemberId = response.members[0].id;
+    }, error => {
+      this.utilityService.openInfoDialog('Error', error);
     });
   }
 
@@ -47,18 +49,15 @@ export class CreateTaskComponent implements OnInit {
     this.postmanService.createTask(task).subscribe((response) => {
       this.utilityService.sendMessage(true);
     }, error => {
-      if (error.status === 401) {
-        this.routingService.navigateToLogin();
-      }
       this.utilityService.openInfoDialog('Error', error);
     });
   }
 
   onSubmit(form: NgForm): void {
-    if (form.valid){
+    if (form.valid) {
       this.createTask(form.value);
     }
-    else{
+    else {
       this.utilityService.openInfoDialog('Error', 'Please fill form correctly');
     }
   }
