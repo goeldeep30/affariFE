@@ -1,7 +1,7 @@
 <mat-card class="mat-card" cdkDrag>
   <mat-card-header>
     <div mat-card-avatar class="mat-card-avatar"></div>
-    <mat-card-title>{{title}}
+    <mat-card-title>{{task.subject}}
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -21,7 +21,7 @@
   <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
   <mat-card-content>
     <p>
-      {{description}}
+      {{task.description}}
     </p>
   </mat-card-content>
   <mat-card-actions>

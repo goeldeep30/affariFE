@@ -7,9 +7,7 @@ import { PostmanService } from '../../postman.service';
   styleUrls: ['./task-card.component.scss']
 })
 export class TaskCardComponent implements OnInit {
-  @Input() title: string;
-  @Input() subTitle: string;
-  @Input() description: string;
+  @Input() task: any;
 
   constructor(private postmanService: PostmanService) { }
 
