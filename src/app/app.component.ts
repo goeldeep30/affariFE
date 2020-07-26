@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PostmanService } from './postman.service';
-import { RoutingService } from './routing.service';
 
 @Component({
   selector: 'app-root',
@@ -8,19 +6,9 @@ import { RoutingService } from './routing.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  events: string[] = [];
-  sCheck = '';
-  constructor(private postmanService: PostmanService,
-              private routingService: RoutingService) {
-                // this.routingService.navigateToProjects();
-                // alert("app.comp.constructor")
-              }
+  constructor() { }
 
   ngOnInit(): void {
-    this.sCheck = 'Error: Can not reach server';
-    this.postmanService.getAPICheck().subscribe((response) => {
-      this.sCheck = response['msg'];
-    });
   }
 }
 

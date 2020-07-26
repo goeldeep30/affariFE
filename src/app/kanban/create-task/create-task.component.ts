@@ -14,8 +14,9 @@ import { TaskStatus } from '../../enums';
   styleUrls: ['./create-task.component.scss']
 })
 export class CreateTaskComponent implements OnInit {
+  title: string;
   TaskStatus: SelectItem[];
-  selectedTaskStatus = TaskStatus.TODO; // Default value to prevent error on data bindong on component init
+  selectedTaskStatus: number;
   projectMembers: any[] = [];
   selectedMemberId: number = null;
   taskFormControl = new FormControl('', [
@@ -28,18 +29,22 @@ export class CreateTaskComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    if (this.data.task){
+      this.title = this.data.task.id ? 'Update Task' : 'Create Task';
+    }
     this.TaskStatus = [
       { label: 'Blocked', value: TaskStatus.BLOCKED },
       { label: 'To Do', value: TaskStatus.TODO },
       { label: 'In Progress', value: TaskStatus.INPROGRESS },
       { label: 'Done', value: TaskStatus.DONE }
     ];
+    this.selectedTaskStatus = this.data.task.id ? this.data.task.status : TaskStatus.TODO;
 
-    this.postmanService.getProjectMembers(this.data.projectId).subscribe((response: any) => {
+    this.postmanService.getProjectMembers(this.data.task.project_id).subscribe((response: any) => {
       for (const member of response.members) {
         this.projectMembers.push({ label: member.username, value: member.id });
       }
-      this.selectedMemberId = response.members[0].id;
+      this.selectedMemberId = this.data.task.id ? this.data.task.user_id : response.members[0].id;
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
     });
@@ -53,12 +58,25 @@ export class CreateTaskComponent implements OnInit {
     });
   }
 
+  updateTask(task: object): void {
+    this.postmanService.updateTask(task).subscribe((response) => {
+      this.utilityService.sendMessage(true);
+    }, error => {
+      this.utilityService.openInfoDialog('Error', error);
+    });
+  }
+
   onSubmit(form: NgForm): void {
     if (form.valid) {
-      this.createTask(form.value);
+      if (this.data.task.id){
+        this.updateTask(form.value);
+      }
+      else{
+        this.createTask(form.value);
+      }
     }
     else {
-      this.utilityService.openInfoDialog('Error', 'Please fill form correctly');
+      this.utilityService.openInfoDialog('Error', 'Please fill the form correctly');
     }
   }
 }

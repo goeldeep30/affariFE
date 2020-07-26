@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostmanService } from '../../postman.service';
 import { UtilityService } from '../../utility.service';
+import { CreateTaskComponent } from '../create-task/create-task.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-task-card',
@@ -11,7 +13,8 @@ export class TaskCardComponent implements OnInit {
   @Input() task: any;
 
   constructor(private postmanService: PostmanService,
-              private utilityService: UtilityService) { }
+              private utilityService: UtilityService,
+              public matDialog: MatDialog) { }
 
   ngOnInit(): void { }
 
@@ -23,6 +26,16 @@ export class TaskCardComponent implements OnInit {
   demoteTask(): void{
     this.task.status -= 1;
     this.updateTask(this.task);
+  }
+
+  openDialog(): void {
+    this.matDialog.open(CreateTaskComponent, {
+      // height: '400px',
+      width: '600px',
+      data: {
+        task: this.task
+      },
+    });
   }
 
   private updateTask(task: object): void {

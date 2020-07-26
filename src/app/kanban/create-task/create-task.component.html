@@ -1,16 +1,22 @@
-<h2 mat-dialog-title>Create Task</h2>
+<h2 mat-dialog-title>{{title}}</h2>
 <mat-dialog-content>
   <form #createTaskForm="ngForm" (ngSubmit)="onSubmit(createTaskForm)">
 
     <div class="form-group">
+      <!-- <label for="inputTaskId">Task Id</label> -->
+      <input type="hidden" name="id" class="form-control" id="inputTaskId" aria-describedby="taskIdHelp"
+        [ngModel]="data?.task.id">
+    </div>
+
+    <div class="form-group">
       <label for="inputSubject">Subject</label>
-      <input required type="text" name="subject" class="form-control" id="inputSubject" aria-describedby="subjectHelp" ngModel>
+      <input required type="text" name="subject" class="form-control" id="inputSubject" aria-describedby="subjectHelp" [ngModel]="data?.task.subject">
     </div>
 
     <div class="form-group">
       <label for="taDescription">Description</label>
       <textarea required name="description" class="form-control" id="taDescription" rows="3" aria-describedby="descriptionHelp"
-        ngModel></textarea>
+        [ngModel]=data?.task.description></textarea>
     </div>
 
     <div class="form-group">
@@ -22,7 +28,7 @@
     <div class="form-group">
       <!-- <label for="inputProjectId">Project Id</label> -->
       <input type="hidden" name="project_id" class="form-control" id="inputProjectId" aria-describedby="projectIdHelp"
-        [ngModel]="data.projectId">
+        [ngModel]="data?.task.project_id">
     </div>
 
     <div class="form-group">

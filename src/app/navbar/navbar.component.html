@@ -42,9 +42,9 @@
         <mat-icon>settings</mat-icon>
         <span>Settings</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="logoutUser()">
         <mat-icon>keyboard_backspace</mat-icon>
-        <span (click)="logoutUser()">Logout</span>
+        <span>Logout</span>
       </button>
       <!-- <button mat-menu-item disabled>
         <mat-icon>voicemail</mat-icon>
