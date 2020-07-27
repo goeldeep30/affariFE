@@ -1,10 +1,10 @@
 <mat-card class="mat-card" cdkDrag>
   <mat-card-header>
     <div mat-card-avatar class="mat-card-avatar"></div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
     <mat-card-title>{{task.subject}}
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="openDialog()">
           <mat-icon>edit</mat-icon>
