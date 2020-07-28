@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './kanban.component.html',
   styleUrls: ['./kanban.component.scss']
 })
-export class KanbanComponent implements OnInit {
+export class KanbanComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   private projectId: number;
   blocked: object[];
@@ -45,7 +45,7 @@ export class KanbanComponent implements OnInit {
       }
       });
   }
-  onDestroy(): void {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
 import { UtilityService } from '../utility.service';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, OnDestroy {
   projects: object;
   subscription: Subscription;
 
@@ -30,6 +30,10 @@ export class ProjectsComponent implements OnInit {
       });
   }
 
+  ngOnDestroy(): void{
+    this.subscription.unsubscribe();
+  }
+
   private getProjects(): void {
     this.postmanService.getProjects().subscribe((response) => {
       this.projects = response.Projects;
@@ -40,22 +44,6 @@ export class ProjectsComponent implements OnInit {
         }
       });
   }
-
-  // private updateProjects(): void {
-  //   this.subscription = this.postmanService.getMessage().subscribe(message => {
-  //       this.getProjects();
-  //       },
-  //         error => {
-  //           if (error.status === 401) {
-  //             this.routingService.navigateToLogin();
-  //           }
-  //         });
-  // }
-
-  onDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
   onSelect(projectId: number): void {
     this.routingService.navigateToKanban(projectId);
   }
