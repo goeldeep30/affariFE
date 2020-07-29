@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
   createUser(user: object): void {
     this.postmanService.createUser(user).subscribe((response) => {
       // localStorage.setItem('user', JSON.stringify(response));
+      this.utilityService.openInfoDialog('Success', response.msg);
       this.routingService.navigateToLogin();
     }, error => {
       this.utilityService.openInfoDialog('Error', 'Unable to create user, Please try again...');
