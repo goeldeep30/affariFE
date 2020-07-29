@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
+import {Component,OnInit, Inject} from '@angular/core';
 import {ENTER, SEMICOLON} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface Member {
   username: string;
 }
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { PostmanService } from '../../postman.service';
-import { RoutingService } from '../../routing.service';
 import { UtilityService } from '../../utility.service';
 
 @Component({
@@ -15,7 +15,8 @@ import { UtilityService } from '../../utility.service';
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.scss']
 })
-export class CreateProjectComponent {
+export class CreateProjectComponent implements OnInit {
+  title: string;
   visible = true;
   selectable = true;
   removable = true;
@@ -24,12 +25,34 @@ export class CreateProjectComponent {
   members: Member[] = [];
 
   constructor(private postmanService: PostmanService,
-              private routingService: RoutingService,
-              private utilityService: UtilityService) { }
+              private utilityService: UtilityService,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  ngOnInit(): void{
+    this.title = 'Create Project';
+    if (this.data){
+      this.title = 'Update Project';
+      this.postmanService.getProjectMembers(this.data.project.id).subscribe((response) => {
+        for (const member of response.members){
+          this.members.push({username: member.username});
+        }
+      });
+    }
+  }
 
   createProject(project: object): void {
     this.postmanService.createProject(project).subscribe((response) => {
       this.utilityService.sendMessage(true);
+      this.utilityService.openInfoDialog('Success', response.msg);
+    }, error => {
+      this.utilityService.openInfoDialog('Error', error);
+    });
+  }
+
+  updateProject(project: object): void {
+    this.postmanService.updateProject(project).subscribe((response) => {
+      this.utilityService.sendMessage(true);
+      this.utilityService.openInfoDialog('Success', response.msg);
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
     });
@@ -37,7 +60,12 @@ export class CreateProjectComponent {
 
   onSubmit(form: NgForm): void {
     if (form.valid){
-      this.createProject(form.value);
+      if (this.data){
+        this.updateProject(form.value);
+      }
+      else{
+        this.createProject(form.value);
+      }
     }
     else{
       this.utilityService.openInfoDialog('Error', 'Please fill form correctly');

@@ -1,17 +1,38 @@
 <div>
   <button mat-stroked-button color="accent" (click)="openDialog()">Create new</button>
-  <ul class="list-group dark-txt">
+  <!-- <ul class="list-group dark-txt">
       <li (click)="onSelect(project.id)" class="list-group-item d-flex justify-content-between align-items-center pointer" 
       *ngFor="let project of projects">
         {{project.project_name}}
         <span class="badge badge-primary badge-pill">14</span>
       </li>
-    </ul>
+    </ul> -->
 
-    <!-- <div class="container row">
-      <div (click)="onSelect(project.id)" *ngFor="let project of projects" class="col">
-        <app-project-card [title]="project.project_name" [description]="project.project_desc"></app-project-card>
+    <div class="row" *ngFor="let project of projects">
+
+      <div class="col-lg" #1>
+        <div class="pad">
+          <app-project-card [project]="project"></app-project-card>
+        </div>
       </div>
-    </div> -->
+
+      <div class="col-lg" #2>
+        <!-- <div class="pad" (click)="onSelect(project.id)">
+          <app-project-card [title]="project.project_name" [description]="project.project_desc"></app-project-card>
+        </div> -->
+      </div>
+
+      <div class="col-lg" #3>
+        <!-- <div class="pad"  (click)="onSelect(project.id)">
+          <app-project-card [title]="project.project_name" [description]="project.project_desc"></app-project-card>
+        </div> -->
+      </div>
+
+      <div class="col-lg" #4>
+        <!-- <div class="pad" (click)="onSelect(project.id)">
+          <app-project-card [title]="project.project_name" [description]="project.project_desc"></app-project-card>
+        </div> -->
+      </div>
+    </div>
 
 </div>

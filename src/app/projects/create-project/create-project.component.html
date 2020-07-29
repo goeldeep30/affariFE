@@ -1,26 +1,32 @@
-<h2 mat-dialog-title>Create Project</h2>
+<h2 mat-dialog-title>{{title}}</h2>
 <mat-dialog-content>
   <form #createProjectForm="ngForm" (ngSubmit)="onSubmit(createProjectForm)">
 
     <div class="form-group">
+      <!-- <label for="inputProjectId">Project Id</label> -->
+      <input type="hidden" name="id" class="form-control" id="inputProjectId" aria-describedby="projectIdHelp"
+        [ngModel]="data?.project.id">
+    </div>
+
+    <div class="form-group">
       <label for="inputSubject">Name</label>
       <input required type="text" name="project_name" class="form-control" id="inputSubject"
-        aria-describedby="subjectHelp" ngModel>
+        aria-describedby="subjectHelp" [ngModel]="data?.project.project_name">
     </div>
 
     <div class="form-group">
       <label for="taDescription">Description</label>
       <textarea required name="project_desc" class="form-control" id="taDescription" rows="3"
-        aria-describedby="descriptionHelp" ngModel></textarea>
+        aria-describedby="descriptionHelp" [ngModel]="data?.project.project_desc"></textarea>
     </div>
 
     <div class="form-group">
-      <label for="inputMembers">Add members</label>
+      <label for="inputMembers">Members</label>
       <input type="hidden" name="project_members" class="form-control" [(ngModel)]="members">
       <!-- <mat-form-field class="chip-list"> -->
       <mat-chip-list #chipList aria-label="Members selection" id="inputMembers">
         <mat-chip *ngFor="let member of members" [selectable]="selectable" [removable]="removable"
-          (removed)="remove(fruit)">
+          (removed)="remove(member)">
           {{member.username}}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>

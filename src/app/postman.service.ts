@@ -33,6 +33,14 @@ export class PostmanService {
     );
   }
 
+  updateProject(project: object): Observable<any> {
+    return this.http.put(
+      this.URL + '/projects',
+      project,
+      { responseType: 'json' }
+    );
+  }
+
   getTasks(projectId: number): Observable<any> {
     return this.http.get(this.URL + `/tasks?project_id=${projectId}`, { responseType: 'json' });
   }
@@ -49,6 +57,13 @@ export class PostmanService {
     return this.http.put(
       this.URL + '/tasks',
       task,
+      { responseType: 'json' }
+    );
+  }
+
+  deleteTask(taskId: number): Observable<any> {
+    return this.http.delete(
+      this.URL + `/tasks?id=${taskId}`,
       { responseType: 'json' }
     );
   }
