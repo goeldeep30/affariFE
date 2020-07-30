@@ -41,6 +41,13 @@ export class PostmanService {
     );
   }
 
+  deleteProject(projectId: number): Observable<any> {
+    return this.http.delete(
+      this.URL + `/projects?id=${projectId}`,
+      { responseType: 'json' }
+    );
+  }
+
   getTasks(projectId: number): Observable<any> {
     return this.http.get(this.URL + `/tasks?project_id=${projectId}`, { responseType: 'json' });
   }
