@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { PostmanService } from './postman.service';
 import { RoutingService } from './routing.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component'
 import { Observable, Subject } from 'rxjs';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,12 @@ export class UtilityService {
       // height: '400px',
       // width: '600px',
       data: { heading, msg },
+    });
+  }
+
+  public openConfirmDialog(heading: string, subHeading: string): MatDialogRef<ConfirmDialogComponent>{
+    return this.matDialog.open(ConfirmDialogComponent, {
+      data: {heading, subHeading},
     });
   }
 

@@ -29,6 +29,7 @@ import { AuthGuard } from './auth.guard';
 import { SignupComponent } from './signup/signup.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { HomeComponent } from './home/home.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -46,11 +47,13 @@ import { HomeComponent } from './home/home.component';
     InfoDialogComponent,
     ProjectCardComponent,
     HomeComponent,
+    ConfirmDialogComponent,
   ],
   entryComponents: [
     CreateTaskComponent,
     CreateProjectComponent,
     InfoDialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,24 +18,29 @@ export class TaskCardComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  promoteTask(): void{
+  promoteTask(): void {
     this.task.status += 1;
     this.updateTask(this.task);
   }
 
-  demoteTask(): void{
+  demoteTask(): void {
     this.task.status -= 1;
     this.updateTask(this.task);
   }
 
-  deleteTask(): void{
-    this.postmanService.  deleteTask(this.task.id).subscribe((response) => {
-      this.utilityService.sendMessage(true);
-      this.utilityService.openInfoDialog('Success', response.msg);
-    }, error => {
-      this.utilityService.openInfoDialog('Error', error);
-    }
-    );
+  deleteTask(): void {
+    this.utilityService.openConfirmDialog('Are you sure ?', 'You can lose your data forever...').afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.postmanService.deleteTask(this.task.id).subscribe((response) => {
+            this.utilityService.sendMessage(true);
+            this.utilityService.openInfoDialog('Success', response.msg);
+          }, error => {
+            this.utilityService.openInfoDialog('Error', error);
+          }
+          );
+        }
+      });
   }
 
   openDialog(): void {

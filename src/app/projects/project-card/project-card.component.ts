@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { RoutingService } from 'src/app/routing.service';
 import { CreateProjectComponent } from '../create-project/create-project.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PostmanService } from 'src/app/postman.service';
 import { UtilityService } from 'src/app/utility.service';
 
@@ -15,15 +15,15 @@ export class ProjectCardComponent {
   panelOpenState: boolean;
 
   constructor(private routingService: RoutingService,
-              private postmanService: PostmanService,
-              private utilityService: UtilityService,
-              private matDialog: MatDialog) { }
+    private postmanService: PostmanService,
+    private utilityService: UtilityService,
+    private matDialog: MatDialog) { }
 
-  onSelect(): void{
+  onSelect(): void {
     this.routingService.navigateToKanban(this.project.id);
   }
 
-  onEditProject(): void{
+  onEditProject(): void {
     this.openDialog();
   }
 
@@ -37,13 +37,18 @@ export class ProjectCardComponent {
     });
   }
 
-  onDeleteProject(): void{
-    this.postmanService.deleteProject(this.project.id).subscribe((response) => {
-      this.utilityService.sendMessage(true);
-      this.utilityService.openInfoDialog('Success', response.msg);
-    }, error => {
-      this.utilityService.openInfoDialog('Error', error);
-    });
+  onDeleteProject(): void {
+    this.utilityService.openConfirmDialog('Are you sure ?', 'You can lose your data forever...').afterClosed()
+      .subscribe((result) => {
+        if (result){
+          this.postmanService.deleteProject(this.project.id).subscribe((response) => {
+            this.utilityService.sendMessage(true);
+            this.utilityService.openInfoDialog('Success', response.msg);
+          }, error => {
+            this.utilityService.openInfoDialog('Error', error);
+          });
+        }
+      });
   }
 
 }
