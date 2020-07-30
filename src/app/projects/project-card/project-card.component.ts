@@ -12,6 +12,7 @@ import { UtilityService } from 'src/app/utility.service';
 })
 export class ProjectCardComponent {
   @Input() project: any;
+  panelOpenState: boolean;
 
   constructor(private routingService: RoutingService,
               private postmanService: PostmanService,
