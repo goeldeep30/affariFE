@@ -23,7 +23,11 @@ export class LoginComponent implements OnInit {
               private routingService: RoutingService,
               private utilityService: UtilityService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (window.localStorage.getItem('user')){
+      this.routingService.navigateToProjects();
+    }
+  }
 
   authoriseMe(credentials: object): void {
     this.postmanService.getAuthToken(credentials).subscribe((response) => {

@@ -16,6 +16,9 @@ export class SignupComponent implements OnInit {
               private utilityService: UtilityService) { }
 
   ngOnInit(): void {
+    if (window.localStorage.getItem('user')){
+      this.routingService.navigateToProjects();
+    }
   }
 
   createUser(user: object): void {

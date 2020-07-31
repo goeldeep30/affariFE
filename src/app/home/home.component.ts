@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
     this.postmanService.getAPICheck().subscribe((response) => {
       this.sCheck = response['msg'];
     });
+    if (window.localStorage.getItem('user')){
+      this.routingService.navigateToProjects();
+    }
   }
 
   navigateToLogin(): void{

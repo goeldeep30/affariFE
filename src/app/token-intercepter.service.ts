@@ -29,11 +29,11 @@ export class TokenIntercepterService implements HttpInterceptor {
           console.log(err.error.msg);
           switch (err.status) {
             case 401: {
-              switch (err.error.err) {
-                case 'INVALID_TOKEN_ERR':
-                  window.localStorage.clear();
-                  break;
-              }
+              window.localStorage.clear();
+              // switch (err.error.err) {
+              //   case 'INVALID_TOKEN_ERR':
+              //     break;
+              // }
               console.log('need to Login again');
               this.routingService.navigateToLogin();
               break;
