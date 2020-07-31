@@ -58,8 +58,8 @@ export class KanbanComponent implements OnInit, OnDestroy {
       if ((response.blocked.length + response.to_do.length
         + response.in_progress.length + response.done.length) > 0) { }
       else {
-        this.utilityService.openInfoDialog('Info', 'No data to present');
-      }
+        this.utilityService.openInfoBar('No data to present', 'ok');
+    }
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
     }
@@ -85,19 +85,16 @@ export class KanbanComponent implements OnInit, OnDestroy {
           }
         );
 
-      this.openSnackBar('Somethin is changed', 'refresh');
+      // this.openSnackBar('Somethin is changed', 'refresh');
     }
   }
 
-  openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action, {
-      duration: 5000,
-    }).onAction().subscribe(() => {
-      console.log('Action taken on snackbar');
-      this.updateKanban();
-
-    });
-  }
+  // openSnackBar(message: string, action: string): void {
+  //   this.utilityService.openInfoBar(message, action)
+  //   .onAction().subscribe(() => {
+  //     this.updateKanban();
+  //   });
+  // }
 
   openDialog(): void {
     this.matDialog.open(CreateTaskComponent, {

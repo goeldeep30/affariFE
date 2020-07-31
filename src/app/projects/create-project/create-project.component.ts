@@ -43,7 +43,7 @@ export class CreateProjectComponent implements OnInit {
   createProject(project: object): void {
     this.postmanService.createProject(project).subscribe((response) => {
       this.utilityService.sendMessage(true);
-      this.utilityService.openInfoDialog('Success', response.msg);
+      this.utilityService.openInfoBar(response.msg);
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
     });
@@ -52,7 +52,7 @@ export class CreateProjectComponent implements OnInit {
   updateProject(project: object): void {
     this.postmanService.updateProject(project).subscribe((response) => {
       this.utilityService.sendMessage(true);
-      this.utilityService.openInfoDialog('Success', response.msg);
+      this.utilityService.openInfoBar(response.msg);
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
     });

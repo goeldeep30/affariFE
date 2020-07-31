@@ -53,6 +53,7 @@ export class CreateTaskComponent implements OnInit {
   createTask(task: object): void {
     this.postmanService.createTask(task).subscribe((response) => {
       this.utilityService.sendMessage(true);
+      this.utilityService.openInfoBar(response.msg, '');
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
     });
@@ -60,6 +61,7 @@ export class CreateTaskComponent implements OnInit {
 
   updateTask(task: object): void {
     this.postmanService.updateTask(task).subscribe((response) => {
+      this.utilityService.openInfoBar(response.msg, '');
       this.utilityService.sendMessage(true);
     }, error => {
       this.utilityService.openInfoDialog('Error', error);

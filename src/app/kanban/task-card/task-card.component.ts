@@ -34,7 +34,7 @@ export class TaskCardComponent implements OnInit {
         if (result) {
           this.postmanService.deleteTask(this.task.id).subscribe((response) => {
             this.utilityService.sendMessage(true);
-            this.utilityService.openInfoDialog('Success', response.msg);
+            this.utilityService.openInfoBar(response.msg);
           }, error => {
             this.utilityService.openInfoDialog('Error', error);
           }
