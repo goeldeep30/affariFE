@@ -1,4 +1,4 @@
-<mat-card class="mat-card" cdkDrag>
+<mat-card class="mat-card" cdkDrag [cdkDragDisabled]="!desktop">
   <mat-card-header>
     <div mat-card-avatar class="mat-card-avatar"></div>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
@@ -9,6 +9,10 @@
         <button mat-menu-item (click)="openDialog()">
           <mat-icon>edit</mat-icon>
           <span>Edit Task</span>
+        </button>
+        <button mat-menu-item (click)="cloneTask()">
+          <mat-icon>file_copy</mat-icon>
+          <span>Clone Task</span>
         </button>
         <button mat-menu-item (click)="deleteTask()">
           <mat-icon>delete</mat-icon>

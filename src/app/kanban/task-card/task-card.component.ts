@@ -11,12 +11,18 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class TaskCardComponent implements OnInit {
   @Input() task: any;
+  desktop: boolean;
 
   constructor(private postmanService: PostmanService,
               private utilityService: UtilityService,
               public matDialog: MatDialog) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.desktop = false;
+    if (window.screen.width > 1000) {
+      this.desktop = true;
+    }
+  }
 
   promoteTask(): void {
     this.task.status += 1;
@@ -56,6 +62,13 @@ export class TaskCardComponent implements OnInit {
   private updateTask(task: object): void {
     this.postmanService.updateTask(task).subscribe((response) => {
       this.utilityService.sendMessage(true);
+    });
+  }
+
+  cloneTask(): void {
+    this.postmanService.createTask(this.task).subscribe((response) => {
+      this.utilityService.sendMessage(true);
+      this.utilityService.openInfoBar('Task cloned successfully', 'ok');
     });
   }
 
