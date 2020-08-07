@@ -23,7 +23,7 @@
     <div class="form-group">
       <label for="inputMembers">Members</label>
       <input type="hidden" name="project_members" class="form-control" [(ngModel)]="members">
-      <!-- <mat-form-field class="chip-list"> -->
+      <mat-form-field class="chip-list">
       <mat-chip-list #chipList aria-label="Members selection" id="inputMembers">
         <mat-chip *ngFor="let member of members" [selectable]="selectable" [removable]="removable"
           (removed)="remove(member)">
@@ -34,7 +34,7 @@
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
           (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
-    <!-- </mat-form-field> -->
+    </mat-form-field>
     </div>
 
     <button type="submit" class="btn btn-primary" mat-dialog-close [disabled]="!createProjectForm.valid">Submit</button>

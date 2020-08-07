@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UtilityService } from '../utility.service';
 
 @Component({
@@ -6,11 +6,11 @@ import { UtilityService } from '../utility.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
+  @Input() isUserLoggedIn: boolean;
 
-  constructor(private utilityService: UtilityService) { }
-
-  ngOnInit(): void {
+  constructor(private utilityService: UtilityService) {
+    this.isUserLoggedIn = false;
   }
 
   logoutUser(): void{

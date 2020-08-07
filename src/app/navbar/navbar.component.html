@@ -30,12 +30,11 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form> -->
   
-  <div>
+  <div *ngIf="isUserLoggedIn">
     <button mat-icon-button  aria-label="icon-button with a menu">
       <mat-icon>search</mat-icon>
     </button>
-  </div>
-  <div>
+
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
       <mat-icon>account_circle</mat-icon>
     </button>

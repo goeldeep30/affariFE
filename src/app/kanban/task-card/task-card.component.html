@@ -28,7 +28,7 @@
       {{task.description}}
     </p>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions *ngIf="!desktop">
     <button mat-button (click)="demoteTask()">Demote</button>
     <button mat-button (click)="promoteTask()">Promote</button>
   </mat-card-actions>

@@ -1,7 +1,16 @@
+<app-navbar></app-navbar>
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6 form-resize">
       <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
+
+        <!-- <img class="profile_pic-resize" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+        <div class="form-group">
+          <label for="inputEmail">Name</label>
+          <input required type="text" name="name" class="form-control" id="inputName" aria-describedby="nameHelp"
+            ngModel>
+        </div>
+
         <div class="form-group">
           <label for="inputEmail">Email address</label>
           <input required type="email" name="username" class="form-control" id="inputEmail" aria-describedby="emailHelp"
@@ -15,8 +24,26 @@
         </div>
 
         <div class="form-group">
-          <label for="inputAccessLevel">Access Level</label>
-          <input required type="text" name="access_level" class="form-control" id="inputAccessLevel" ngModel>
+          <label for="inputRePassword">Confirm Password</label>
+          <input required type="password" name="rePassword" class="form-control" id="inputRePassword" ngModel>
+        </div>
+
+        <!-- <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>Date Of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" name="dob" ngModel>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div> -->
+
+        <!-- <div class="form-group">
+          <label for="fileInput">Profile Image</label>
+          <input type="file" class="form-control-file" id="fileInput" name="profile_image" ngModel>
+        </div> -->
+
+        <div class="form-group">
+          <input required type="hidden" name="access_level" class="form-control" id="inputAccessLevel" [ngModel]=1>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
