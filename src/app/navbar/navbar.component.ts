@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { UtilityService } from '../utility.service';
 import { NgForm } from '@angular/forms';
 
@@ -7,9 +7,20 @@ import { NgForm } from '@angular/forms';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @Input() isUserLoggedIn: boolean;
   @Output() newSearchFilterEvent = new EventEmitter<string>();
+  title: string;
+  desktop: boolean;
+
+  ngOnInit(): void{
+    this.desktop = false;
+    this.title = '';
+    if (window.screen.width > 1000) {
+      this.desktop = true;
+      this.title = 'Affari';
+    }
+  }
 
   constructor(private utilityService: UtilityService) {
     this.isUserLoggedIn = false;

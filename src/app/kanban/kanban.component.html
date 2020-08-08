@@ -5,8 +5,10 @@
     <div cdkDropListGroup class="row kanban">
 
       <div class="col-lg kanban-status example-container">
-        <!-- <h3><span class="badge badge-secondary">Blocked</span></h3> -->
-        <button type="button" class="btn btn-secondary container-fluid" data-toggle="collapse" data-target="#blockedTasks">Blocked</button>
+        <button type="button" class="btn btn-secondary container-fluid" data-toggle="collapse" data-target="#blockedTasks">
+          Blocked
+          <span class="badge badge-primary badge-pill">{{blocked.length}}</span>
+        </button>
           <div id="blockedTasks" class="collapse show">
             <div cdkDropList [cdkDropListData]="blocked" [id]="taskStatus.blocked" class="example-list" (cdkDropListDropped)="drop($event)">
               <div *ngFor="let task of blocked;" class="pad">
@@ -17,8 +19,10 @@
       </div>
 
       <div class="col-lg kanban-status example-container">
-        <!-- <h3><span class="badge badge-secondary">To do</span></h3> -->
-        <button type="button" class="btn btn-secondary container-fluid" data-toggle="collapse" data-target="#todoTasks">To do</button>
+        <button type="button" class="btn btn-secondary container-fluid" data-toggle="collapse" data-target="#todoTasks">
+          To do
+          <span class="badge badge-primary badge-pill">{{todo.length}}</span>
+        </button>
         <div id="todoTasks" class="collapse show">
           <div cdkDropList [cdkDropListData]="todo" [id]="taskStatus.todo" class="example-list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let task of todo;" class="pad">
@@ -29,8 +33,10 @@
       </div>
 
       <div class="col-lg kanban-status example-container">
-        <!-- <h3><span class="badge badge-secondary">Inprogress</span></h3> -->
-        <button type="button" class="btn btn-secondary container-fluid" data-toggle="collapse" data-target="#inProgressTasks">Inprogress</button>
+        <button type="button" class="btn btn-secondary container-fluid" data-toggle="collapse" data-target="#inProgressTasks">
+          Inprogress
+          <span class="badge badge-primary badge-pill">{{inProgress.length}}</span>
+        </button>
         <div id="inProgressTasks" class="collapse show">
           <div cdkDropList [cdkDropListData]="inProgress" [id]="taskStatus.inProgress" class="example-list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let task of inProgress;" class="pad">
@@ -41,8 +47,10 @@
       </div>
 
       <div class="col-lg kanban-status example-container">
-        <!-- <h3><span class="badge badge-secondary">Done</span></h3> -->
-        <button type="button" class="btn btn-secondary container-fluid" data-toggle="collapse" data-target="#doneTasks">Done</button>
+        <button type="button" class="btn btn-secondary container-fluid" data-toggle="collapse" data-target="#doneTasks">
+          Done
+          <span class="badge badge-primary badge-pill">{{done.length}}</span>
+        </button>
         <div id="doneTasks" class="collapse show">
           <div cdkDropList [cdkDropListData]="done" [id]="taskStatus.done" class="example-list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let task of done;" class="pad">
