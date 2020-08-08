@@ -25,33 +25,34 @@
         </li> 
       </ul>-->
   </div>
-  <!-- <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form> -->
+  
   
   <div *ngIf="isUserLoggedIn">
-    <button mat-icon-button  aria-label="icon-button with a menu">
-      <mat-icon>search</mat-icon>
-    </button>
+    <form class="form-inline my-2 my-lg-0" #searchForm="ngForm" (ngSubmit)="onSearchSubmit(searchForm)">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchFilter" ngModel>
+      <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+      <button mat-icon-button  aria-label="icon-button with a menu" type="submit">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item disabled>
+          <mat-icon>work</mat-icon>
+          <span>My Account</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </button>
+        <button mat-menu-item (click)="logoutUser()">
+          <mat-icon>keyboard_backspace</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </form>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item disabled>
-        <mat-icon>work</mat-icon>
-        <span>My Account</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>settings</mat-icon>
-        <span>Settings</span>
-      </button>
-      <button mat-menu-item (click)="logoutUser()">
-        <mat-icon>keyboard_backspace</mat-icon>
-        <span>Logout</span>
-      </button>
-    </mat-menu>
   </div>
 
   <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

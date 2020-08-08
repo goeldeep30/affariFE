@@ -13,7 +13,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
-  projects: object;
+  projects: any[];
+  // Bkp needed to reset search filter
+  projectsBkp: any[];
   subscription: Subscription;
 
   constructor(private routingService: RoutingService,
@@ -37,6 +39,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   private getProjects(): void {
     this.postmanService.getProjects().subscribe((response) => {
       this.projects = response.Projects;
+      this.projectsBkp = response.Projects;
     },
       error => {
         if (error.status === 401) {
@@ -44,6 +47,18 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         }
       });
   }
+
+  private filterProjects(list: any[], filterQuery: string): any[] {
+    return list.filter(e => e.project_name.toLowerCase().includes(filterQuery)
+      || e.project_desc.toLowerCase().includes(filterQuery)
+      || e.owner.toLowerCase().includes(filterQuery)
+      );
+  }
+
+  applySearchFilter(event: any): void{
+    this.projects = this.filterProjects(this.projectsBkp, event.searchFilter.toLowerCase());
+  }
+
   onSelect(projectId: number): void {
     this.routingService.navigateToKanban(projectId);
   }

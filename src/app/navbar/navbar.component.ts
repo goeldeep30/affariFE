@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UtilityService } from '../utility.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +9,7 @@ import { UtilityService } from '../utility.service';
 })
 export class NavbarComponent {
   @Input() isUserLoggedIn: boolean;
+  @Output() newSearchFilterEvent = new EventEmitter<string>();
 
   constructor(private utilityService: UtilityService) {
     this.isUserLoggedIn = false;
@@ -15,6 +17,10 @@ export class NavbarComponent {
 
   logoutUser(): void{
     this.utilityService.logoutUser();
+  }
+
+  onSearchSubmit(form: NgForm): void{
+    this.newSearchFilterEvent.emit(form.value);
   }
 
 }

@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { PostmanService } from '../postman.service';
-import { RoutingService } from '../routing.service';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { TaskStatus } from '../enums';
 import { UtilityService } from '../utility.service';
@@ -19,10 +17,15 @@ import { Subscription } from 'rxjs';
 export class KanbanComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   private projectId: number;
-  blocked: object[];
+  blocked: any[];
   todo: object[];
   inProgress: object[];
   done: object[];
+  // BKP needed to reset the search filters
+  blockedBkp: any[];
+  todoBkp: object[];
+  inProgressBkp: object[];
+  doneBkp: object[];
   readonly taskStatus: any = {
     blocked: TaskStatus.BLOCKED,
     todo: TaskStatus.TODO,
@@ -31,19 +34,19 @@ export class KanbanComponent implements OnInit, OnDestroy {
   };
 
   constructor(private route: ActivatedRoute, private postmanService: PostmanService,
-              private routingService: RoutingService,
               private utilityService: UtilityService,
-              private snackBar: MatSnackBar,
               public matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.projectId = +this.route.snapshot.paramMap.get('projectid');
+    // const filterQry: string = this.route.snapshot.paramMap.get('search');
     this.updateKanban();
+    // this.filterKanBan(filterQry);
     this.subscription = this.utilityService.getMessage().subscribe(message => {
       if (message) {
         this.updateKanban();
       }
-      });
+    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -55,15 +58,39 @@ export class KanbanComponent implements OnInit, OnDestroy {
       this.todo = response.to_do;
       this.inProgress = response.in_progress;
       this.done = response.done;
+
+      this.blockedBkp = response.blocked;
+      this.todoBkp = response.to_do;
+      this.inProgressBkp = response.in_progress;
+      this.doneBkp = response.done;
+
       if ((response.blocked.length + response.to_do.length
         + response.in_progress.length + response.done.length) > 0) { }
       else {
         this.utilityService.openInfoBar('No data to present', 'ok');
-    }
+      }
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
     }
     );
+  }
+
+  private filterKanBan(list: any[], filterQuery: string): any[] {
+    return list.filter(e => e.subject.toLowerCase().includes(filterQuery)
+      || e.description.toLowerCase().includes(filterQuery)
+      || e.assigned_user.toLowerCase().includes(filterQuery)
+      );
+      // .sort((a, b) => a.subject.includes(filterQuery) &&
+      //   !b.id.includes(filterQuery) ? -1 : b.id.includes(filterQuery) &&
+      //     !a.id.includes(filterQuery) ? 1 : 0);
+  }
+
+  applySearchFilter(event: any): void{
+    event.searchFilter = event.searchFilter.toLowerCase();
+    this.blocked = this.filterKanBan(this.blockedBkp, event.searchFilter);
+    this.todo = this.filterKanBan(this.todoBkp, event.searchFilter);
+    this.inProgress = this.filterKanBan(this.inProgressBkp, event.searchFilter);
+    this.done = this.filterKanBan(this.doneBkp, event.searchFilter);
   }
 
   drop(event: CdkDragDrop<string[]>): void {
