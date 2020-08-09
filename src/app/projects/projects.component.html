@@ -1,7 +1,7 @@
 <app-navbar [isUserLoggedIn]="true" (newSearchFilterEvent)="applySearchFilter($event)"></app-navbar>
 <div>
   <button mat-stroked-button color="accent" (click)="openDialog()">Create new</button>
-    <div class="row" >
+    <div class="container-fluid row" >
       <div class="col-lg-3" #1 *ngFor="let project of projects">
         <div class="pad">
           <app-project-card [project]="project"></app-project-card>
