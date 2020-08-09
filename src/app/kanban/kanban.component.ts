@@ -85,12 +85,12 @@ export class KanbanComponent implements OnInit, OnDestroy {
       //     !a.id.includes(filterQuery) ? 1 : 0);
   }
 
-  applySearchFilter(event: any): void{
-    event.searchFilter = event.searchFilter.toLowerCase();
-    this.blocked = this.filterKanBan(this.blockedBkp, event.searchFilter);
-    this.todo = this.filterKanBan(this.todoBkp, event.searchFilter);
-    this.inProgress = this.filterKanBan(this.inProgressBkp, event.searchFilter);
-    this.done = this.filterKanBan(this.doneBkp, event.searchFilter);
+  applySearchFilter(searchFilter: string): void{
+    searchFilter = searchFilter.toLowerCase();
+    this.blocked = this.filterKanBan(this.blockedBkp, searchFilter);
+    this.todo = this.filterKanBan(this.todoBkp, searchFilter);
+    this.inProgress = this.filterKanBan(this.inProgressBkp, searchFilter);
+    this.done = this.filterKanBan(this.doneBkp, searchFilter);
   }
 
   drop(event: CdkDragDrop<string[]>): void {

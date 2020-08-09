@@ -30,8 +30,13 @@ export class NavbarComponent implements OnInit {
     this.utilityService.logoutUser();
   }
 
-  onSearchSubmit(form: NgForm): void{
-    this.newSearchFilterEvent.emit(form.value);
+  // onSearchSubmit(form: NgForm): void{
+  //   this.newSearchFilterEvent.emit(form.value);
+  // }
+
+  onSearchChange(searchValue: string): void {
+    console.log(searchValue);
+    this.newSearchFilterEvent.emit(searchValue);
   }
 
 }

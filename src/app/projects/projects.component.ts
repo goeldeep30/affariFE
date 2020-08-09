@@ -55,8 +55,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       );
   }
 
-  applySearchFilter(event: any): void{
-    this.projects = this.filterProjects(this.projectsBkp, event.searchFilter.toLowerCase());
+  applySearchFilter(searchFilter: string): void{
+    this.projects = this.filterProjects(this.projectsBkp, searchFilter.toLowerCase());
   }
 
   onSelect(projectId: number): void {
