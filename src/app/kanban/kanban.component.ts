@@ -17,12 +17,12 @@ import { Subscription } from 'rxjs';
 export class KanbanComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   private projectId: number;
-  blocked: any[];
-  todo: object[];
-  inProgress: object[];
-  done: object[];
+  blocked: object[] = [];
+  todo: object[] = [];
+  inProgress: object[]  = [];
+  done: object[] = [];
   // BKP needed to reset the search filters
-  blockedBkp: any[];
+  blockedBkp: object[];
   todoBkp: object[];
   inProgressBkp: object[];
   doneBkp: object[];

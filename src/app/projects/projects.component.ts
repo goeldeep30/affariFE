@@ -13,9 +13,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
-  projects: any[];
+  projects: object[];
   // Bkp needed to reset search filter
-  projectsBkp: any[];
+  projectsBkp: object[];
   subscription: Subscription;
 
   constructor(private routingService: RoutingService,

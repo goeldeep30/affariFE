@@ -28,31 +28,31 @@
         </li>  -->
       </ul>
     </div>
-        <div *ngIf="isUserLoggedIn">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control fixedWidth" type="search" placeholder="Search" aria-label="Search" name="searchFilter" ngModel (input)="onSearchChange($event.target.value)">
-            <!-- <button mat-icon-button  aria-label="icon-button with a menu" type="submit">
-              <mat-icon>search</mat-icon>
-            </button> -->
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
-              <mat-icon>account_circle</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item disabled>
-                <mat-icon>work</mat-icon>
-                <span>My Account</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>settings</mat-icon>
-                <span>Settings</span>
-              </button>
-              <button mat-menu-item (click)="logoutUser()">
-                <mat-icon>keyboard_backspace</mat-icon>
-                <span>Logout</span>
-              </button>
-            </mat-menu>
-          </form>
-        </div>
+       
+    <div class="form-inline my-2 my-lg-0" *ngIf="isUserLoggedIn">
+      <input class="form-control fixedWidth" type="search" placeholder="Search" aria-label="Search" name="searchFilter" ngModel (input)="onSearchChange($event.target.value)">
+      <!-- <button mat-icon-button  aria-label="icon-button with a menu" type="submit">
+        <mat-icon>search</mat-icon>
+      </button> -->
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item disabled>
+          <mat-icon>work</mat-icon>
+          <span>My Account</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </button>
+        <button mat-menu-item (click)="logoutUser()">
+          <mat-icon>keyboard_backspace</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+        
   
   
   

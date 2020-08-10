@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { PostmanService } from './postman.service';
 import { RoutingService } from './routing.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { InfoDialogComponent } from './info-dialog/info-dialog.component'
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { Observable, Subject } from 'rxjs';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
@@ -40,8 +40,10 @@ export class UtilityService {
   public logoutUser(): void{
     this.postmanService.userLogout().subscribe((response) => {
       localStorage.clear();
+      this.routingService.navigateToLogin();
+    }, error => {
+      this.openInfoDialog('Error', error);
     });
-    this.routingService.navigateToLogin();
   }
 
   public openInfoDialog(heading: string, msg: string): void{
