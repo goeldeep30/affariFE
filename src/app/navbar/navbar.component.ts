@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   @Output() newSearchFilterEvent = new EventEmitter<string>();
   title: string;
   desktop: boolean;
+  loggedInUserName: string;
 
   ngOnInit(): void{
     this.desktop = false;
@@ -23,7 +24,8 @@ export class NavbarComponent implements OnInit {
   }
 
   constructor(private utilityService: UtilityService) {
-    this.isUserLoggedIn = false;
+    // this.isUserLoggedIn = false;
+    this.loggedInUserName = utilityService.getLoggedInUsername();
   }
 
   logoutUser(): void{

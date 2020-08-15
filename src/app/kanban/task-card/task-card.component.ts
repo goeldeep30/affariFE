@@ -68,7 +68,7 @@ export class TaskCardComponent implements OnInit {
   cloneTask(): void {
     this.postmanService.createTask(this.task).subscribe((response) => {
       this.utilityService.sendMessage(true);
-      this.utilityService.openInfoBar('Task cloned successfully', 'ok');
+      this.utilityService.openInfoBar('Task cloned successfully');
     });
   }
 

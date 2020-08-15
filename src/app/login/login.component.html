@@ -2,16 +2,22 @@
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6 form-resize">
-      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
         <div class="form-group">
-          <label for="inputEmail">Username/ Email address</label>
-          <input required type="email" name="username" class="form-control" id="inputEmail"
-            aria-describedby="emailHelp" ngModel>
-          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+          <mat-form-field>
+            <mat-label>Enter your email</mat-label>
+            <input required matInput name="username" placeholder="pat@example.com" id="inputEmail" ngModel >
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field><br>
         </div>
         <div class="form-group">
-          <label for="inputPassword">Password</label>
-          <input required type="password" name="password" class="form-control" id="inputPassword" ngModel>
+          <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput name="password" [type]="hide ? 'password' : 'text'" ngModel>
+            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
         </div>
         <div class="form-group form-check">
           <input type="checkbox" class="form-check-input" id="checkRememberMe">
@@ -23,19 +29,3 @@
     </div>
   </div>
 </div>
-
-
-<!-- <div class="container">
-  
-</div> -->
-
-
-
-
-<!-- <form [formGroup]="signin">
-  <mat-form-field>
-       <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
-       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-       <mat-hint *ngIf="!passwordInput.value">Enter your password</mat-hint>
-   </mat-form-field>
- </form> -->

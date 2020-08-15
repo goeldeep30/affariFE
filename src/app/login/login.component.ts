@@ -13,12 +13,9 @@ import { UtilityService } from '../utility.service';
 })
 
 export class LoginComponent implements OnInit {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  email = new FormControl('', [Validators.required, Validators.email]);
+  hide = true;
 
-  matcher = new MyErrorStateMatcher();
   constructor(private postmanService: PostmanService,
               private routingService: RoutingService,
               private utilityService: UtilityService) { }
@@ -29,7 +26,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  authoriseMe(credentials: object): void {
+  private authoriseMe(credentials: object): void {
     this.postmanService.getAuthToken(credentials).subscribe((response) => {
       localStorage.setItem('user', JSON.stringify(response));
       this.routingService.navigateToProjects();
@@ -48,13 +45,12 @@ export class LoginComponent implements OnInit {
     this.routingService.navigateToSignUp();
   }
 
-}
+  getErrorMessage(): string{
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
 
-
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+
 }

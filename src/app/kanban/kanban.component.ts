@@ -67,7 +67,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
       if ((response.blocked.length + response.to_do.length
         + response.in_progress.length + response.done.length) > 0) { }
       else {
-        this.utilityService.openInfoBar('No data to present', 'ok');
+        this.utilityService.openInfoBar('No data to present');
       }
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
@@ -76,10 +76,15 @@ export class KanbanComponent implements OnInit, OnDestroy {
   }
 
   private filterKanBan(list: any[], filterQuery: string): any[] {
-    return list.filter(e => e.subject.toLowerCase().includes(filterQuery)
-      || e.description.toLowerCase().includes(filterQuery)
-      || e.assigned_user.toLowerCase().includes(filterQuery)
-      );
+    return list.filter((element) => {
+      element.subject = element.subject ? element.subject : '';
+      element.description = element.description ? element.description : '';
+      element.assigned_user = element.assigned_user ? element.assigned_user : '';
+      return (
+        element.subject.toLowerCase().includes(filterQuery) ||
+        element.description.toLowerCase().includes(filterQuery) ||
+        element.assigned_user.toLowerCase().includes(filterQuery));
+    });
       // .sort((a, b) => a.subject.includes(filterQuery) &&
       //   !b.id.includes(filterQuery) ? -1 : b.id.includes(filterQuery) &&
       //     !a.id.includes(filterQuery) ? 1 : 0);

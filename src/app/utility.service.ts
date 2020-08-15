@@ -29,6 +29,12 @@ export class UtilityService {
     }
   }
 
+  public getLoggedInUsername(): string{
+    if (this.loggedIn()){
+      return JSON.parse(localStorage.getItem('user'))['username'];
+    }
+  }
+
   public getRefreshToken(): object{
     return JSON.parse(localStorage.getItem('user'));
   }
@@ -60,7 +66,7 @@ export class UtilityService {
     });
   }
 
-  public openInfoBar(msg: string, action: string = '', duration: number = 5000): MatSnackBarRef<TextOnlySnackBar>{
+  public openInfoBar(msg: string, action: string = 'ok', duration: number = 5000): MatSnackBarRef<TextOnlySnackBar>{
     return this.snackBar.open(msg, action, {
       duration,
     });

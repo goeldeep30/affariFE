@@ -5,3 +5,13 @@
 .fixedWidth{
     width: 200px;
 }
+
+.mat-card-avatar {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+mat-menu {
+    z-index:2;
+    position: fixed;
+}
