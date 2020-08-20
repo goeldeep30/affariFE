@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
 import { UtilityService } from '../utility.service';
@@ -10,14 +10,37 @@ import { UtilityService } from '../utility.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+  userSignUpForm: FormGroup;
+  name: FormControl;
+  username: FormControl;
+  password: FormControl;
+  rePassword: FormControl;
+  access_level: FormControl;
+  hide = true;
 
   constructor(private postmanService: PostmanService,
               private routingService: RoutingService,
               private utilityService: UtilityService) { }
 
   ngOnInit(): void {
-    if (window.localStorage.getItem('user')){
+    if (window.localStorage.getItem('user')){ // If user is already logged in
       this.routingService.navigateToProjects();
+    }
+    else{
+      this.name = new FormControl('', Validators.required);
+      this.username = new FormControl('', [Validators.required, Validators.email]);
+      this.password = new FormControl('', Validators.required);
+      this.rePassword = new FormControl('', [Validators.required]);
+      this.access_level = new FormControl('', Validators.required);
+      this.userSignUpForm = new FormGroup({
+        name : this.name,
+        username : this.username,
+        password : this.password,
+        rePassword : this.rePassword,
+        access_level : this.access_level,
+      },
+      {validators:  this.verifyPassword}
+      );
     }
   }
 
@@ -42,6 +65,36 @@ export class SignupComponent implements OnInit {
 
   navigateToLogin(): void{
     this.routingService.navigateToLogin();
+  }
+
+  getErrorMessage(): string{
+    if (this.username.hasError('required')) {
+      return 'You must enter a value';
+    }
+    return this.username.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  checkPasswords(group: FormGroup): any { // here we have the 'passwords' group
+  const pass = group.get('password').value;
+  const confirmPass = group.get('rePassword').value;
+  console.log(this.rePassword.errors);
+  
+  return pass === confirmPass ? null : { notSame: true };
+}
+
+  verifyPassword(control: AbstractControl): any{
+    const pass = control.value.password;
+    const rePass = control.value.rePassword;
+    const val = pass === rePass ? null : { notSame: true };
+    return val;
+  }
+
+  getErrorMessagePassword(): string{
+    if (this.rePassword.hasError('required')) {
+    }
+    return 'You must enter a value';
+    // return this.verifyPassword ? '' : 'Password did not matched';
+
   }
 
 }

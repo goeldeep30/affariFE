@@ -2,48 +2,49 @@
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6 form-resize">
-      <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
+      <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)" [formGroup]="userSignUpForm">
 
         <!-- <img class="profile_pic-resize" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
         <div class="form-group">
-          <label for="inputEmail">Name</label>
-          <input required type="text" name="name" class="form-control" id="inputName" aria-describedby="nameHelp"
-            ngModel>
+          <mat-form-field>
+            <mat-label>Full Name</mat-label>
+            <input required matInput type="text" name="name" id="inputName" formControlName="name" ngModel >
+          </mat-form-field>
         </div>
 
         <div class="form-group">
-          <label for="inputEmail">Email address</label>
-          <input required type="email" name="username" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-            ngModel>
+          <mat-form-field>
+            <mat-label>Enter your email</mat-label>
+            <input required matInput type="email" name="username" placeholder="pat@example.com" id="inputEmail" formControlName="username" ngModel >
+            <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
         </div>
 
         <div class="form-group">
-          <label for="inputPassword">Password</label>
-          <input required type="password" name="password" class="form-control" id="inputPassword" ngModel>
-        </div>
-
-        <div class="form-group">
-          <label for="inputRePassword">Confirm Password</label>
-          <input required type="password" name="rePassword" class="form-control" id="inputRePassword" ngModel>
-        </div>
-
-        <!-- <div class="form-group">
-          <mat-form-field appearance="fill">
-            <mat-label>Date Of Birth</mat-label>
-            <input matInput [matDatepicker]="picker" name="dob" ngModel>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+          <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input required matInput name="password" [type]="hide ? 'password' : 'text'" formControlName="password" ngModel>
+            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
           </mat-form-field>
-        </div> -->
-
-        <!-- <div class="form-group">
-          <label for="fileInput">Profile Image</label>
-          <input type="file" class="form-control-file" id="fileInput" name="profile_image" ngModel>
-        </div> -->
+        </div>
 
         <div class="form-group">
-          <input required type="hidden" name="access_level" class="form-control" id="inputAccessLevel" [ngModel]=1>
+          <mat-form-field>
+            <mat-label>Re Enter Password</mat-label>
+            <input required matInput type="password" name="rePassword" id="inputRePassword" formControlName="rePassword" ngModel >
+            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <!-- <mat-error *ngIf="rePassword.invalid">{{getErrorMessage()}}</mat-error> -->
+          </mat-form-field>
+
+        </div>
+
+        <div class="form-group">
+          <input required type="hidden" name="access_level" class="form-control" id="inputAccessLevel" formControlName="access_level" [ngModel]=1>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
