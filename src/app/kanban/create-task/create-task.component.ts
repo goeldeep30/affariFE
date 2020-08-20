@@ -15,6 +15,7 @@ import { TaskStatus } from '../../enums';
 })
 export class CreateTaskComponent implements OnInit {
   title: string;
+  selectedFile: File;
   TaskStatus: SelectItem[];
   selectedTaskStatus: number;
   projectMembers: any[] = [];
@@ -68,8 +69,13 @@ export class CreateTaskComponent implements OnInit {
     });
   }
 
+  onFileSelection(event: any): void {
+    this.selectedFile = (event.target.files[0] as File);
+  }
+
   onSubmit(form: NgForm): void {
     if (form.valid) {
+      form.value.ref_image = this.selectedFile;
       if (this.data.task.id){
         this.updateTask(form.value);
       }

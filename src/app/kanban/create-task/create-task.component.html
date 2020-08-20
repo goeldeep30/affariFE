@@ -37,6 +37,12 @@
       <p-dropdown required [options]="projectMembers" id="inputAssignTo" name="user_id" [(ngModel)]="selectedMemberId"></p-dropdown>
     </div>
 
-    <button type="submit" class="btn btn-primary" mat-dialog-close [disabled]="!createTaskForm.valid">Submit</button>
+    <div class="form-group">
+          <label for="fileInput">Profile Image</label>
+          <input type="file" class="form-control-file" id="fileInput" (change)="onFileSelection($event)" name="ref_image" accept="image/*" ngModel>
+    </div>
+
+    <button type="submit" class="btn btn-primary mr-2" mat-dialog-close [disabled]="!createTaskForm.valid">Submit</button>
+    <button type="button" class="btn btn-primary" mat-dialog-close>Cancel</button>
   </form>
 </mat-dialog-content>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -53,18 +53,37 @@ export class PostmanService {
   }
 
   createTask(task: object): Observable<any> {
+    const formData = new FormData();
+    // tslint:disable-next-line: forin
+    for (const key in task) {
+      formData.append(key, task[key]);
+    }
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
     return this.http.post(
       this.URL + '/tasks',
-      task,
+      formData,
       { responseType: 'json' }
     );
   }
 
   updateTask(task: object): Observable<any> {
+    const formData = new FormData();
+    // tslint:disable-next-line: forin
+    for (const key in task) {
+      formData.append(key, task[key]);
+    }
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
     return this.http.put(
       this.URL + '/tasks',
-      task,
-      { responseType: 'json' }
+      formData,
+      {
+        headers,
+        responseType: 'json'
+      }
     );
   }
 
