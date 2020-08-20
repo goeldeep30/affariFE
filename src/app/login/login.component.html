@@ -2,18 +2,18 @@
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6 form-resize">
-      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" [formGroup]="userLoginForm" autocomplete="off">
         <div class="form-group">
           <mat-form-field>
             <mat-label>Enter your email</mat-label>
-            <input required matInput name="username" placeholder="pat@example.com" id="inputEmail" ngModel >
-            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field><br>
+            <input required matInput type="email" name="username" placeholder="pat@example.com" id="inputEmail" formControlName="username" ngModel >
+            <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
         </div>
         <div class="form-group">
           <mat-form-field>
             <mat-label>Enter your password</mat-label>
-            <input matInput name="password" [type]="hide ? 'password' : 'text'" ngModel>
+            <input matInput name="password" [type]="hide ? 'password' : 'text'" formControlName="password" ngModel>
             <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>

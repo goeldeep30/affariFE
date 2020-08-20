@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { PostmanService } from '../postman.service';
 import { RoutingService } from '../routing.service';
 import { UtilityService } from '../utility.service';
@@ -12,7 +12,9 @@ import { UtilityService } from '../utility.service';
 })
 
 export class LoginComponent implements OnInit {
-  email = new FormControl('', [Validators.required, Validators.email]);
+  userLoginForm: FormGroup;
+  username: FormControl;
+  password: FormControl;
   hide = true;
 
   constructor(private postmanService: PostmanService,
@@ -22,6 +24,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (window.localStorage.getItem('user')){
       this.routingService.navigateToProjects();
+    }
+    else{
+      this.username = new FormControl('', [Validators.required, Validators.email]);
+      this.password = new FormControl('', Validators.required);
+      this.userLoginForm = new FormGroup({
+        username : this.username,
+        password : this.password
+      });
     }
   }
 
@@ -45,11 +55,10 @@ export class LoginComponent implements OnInit {
   }
 
   getErrorMessage(): string{
-    if (this.email.hasError('required')) {
+    if (this.username.hasError('required')) {
       return 'You must enter a value';
     }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.username.hasError('email') ? 'Not a valid email' : '';
   }
 
 }
