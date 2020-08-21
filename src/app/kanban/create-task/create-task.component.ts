@@ -3,7 +3,6 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { PostmanService } from '../../postman.service';
-import { RoutingService } from '../../routing.service';
 import { UtilityService } from '../../utility.service';
 import { SelectItem } from 'primeng/api';
 import { TaskStatus } from '../../enums';
@@ -25,7 +24,6 @@ export class CreateTaskComponent implements OnInit {
   ]);
 
   constructor(private postmanService: PostmanService,
-              private routingService: RoutingService,
               private utilityService: UtilityService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -45,7 +43,16 @@ export class CreateTaskComponent implements OnInit {
       for (const member of response.members) {
         this.projectMembers.push({ label: member.username, value: member.id });
       }
-      this.selectedMemberId = this.data.task.id ? this.data.task.user_id : response.members[0].id;
+      this.selectedMemberId = response.members[0].id;
+      if (!!this.data.task.id){
+        for (const member of this.projectMembers){
+          if (member.value === this.data.task.user_id){
+            this.selectedMemberId = this.data.task.user_id;
+            break;
+          }
+        }
+      }
+
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
     });
