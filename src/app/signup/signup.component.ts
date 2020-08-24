@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
   password: FormControl;
   rePassword: FormControl;
   access_level: FormControl;
+
   hide = true;
 
   constructor(private postmanService: PostmanService,
@@ -30,7 +31,7 @@ export class SignupComponent implements OnInit {
       this.name = new FormControl('', Validators.required);
       this.username = new FormControl('', [Validators.required, Validators.email]);
       this.password = new FormControl('', Validators.required);
-      this.rePassword = new FormControl('', [Validators.required]);
+      this.rePassword = new FormControl('', Validators.required);
       this.access_level = new FormControl('', Validators.required);
       this.userSignUpForm = new FormGroup({
         name : this.name,
@@ -74,26 +75,21 @@ export class SignupComponent implements OnInit {
     return this.username.hasError('email') ? 'Not a valid email' : '';
   }
 
-  checkPasswords(group: FormGroup): any { // here we have the 'passwords' group
-  const pass = group.get('password').value;
-  const confirmPass = group.get('rePassword').value;
-  console.log(this.rePassword.errors);
-  
-  return pass === confirmPass ? null : { notSame: true };
-}
-
   verifyPassword(control: AbstractControl): any{
     const pass = control.value.password;
     const rePass = control.value.rePassword;
     const val = pass === rePass ? null : { notSame: true };
+    if (val){
+      control.get('rePassword').setErrors( {notMatched: true});
+    }
     return val;
   }
 
   getErrorMessagePassword(): string{
     if (this.rePassword.hasError('required')) {
+      return 'You must enter a value';
     }
-    return 'You must enter a value';
-    // return this.verifyPassword ? '' : 'Password did not matched';
+    return this.rePassword.hasError('notSame') ? '' : 'Password did not matched';
 
   }
 

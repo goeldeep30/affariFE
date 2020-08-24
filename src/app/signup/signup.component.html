@@ -35,12 +35,8 @@
           <mat-form-field>
             <mat-label>Re Enter Password</mat-label>
             <input required matInput type="password" name="rePassword" id="inputRePassword" formControlName="rePassword" ngModel >
-            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            <!-- <mat-error *ngIf="rePassword.invalid">{{getErrorMessage()}}</mat-error> -->
+            <mat-error *ngIf="userSignUpForm.hasError('notSame')">{{getErrorMessagePassword()}}</mat-error>
           </mat-form-field>
-
         </div>
 
         <div class="form-group">
