@@ -9,8 +9,8 @@ export class PostmanService {
   private URL: string;
 
   constructor(private http: HttpClient) {
-    // this.URL = 'http://localhost:5000';
-    this.URL = 'https://affari.herokuapp.com';
+    this.URL = 'http://localhost:5000';
+    // this.URL = 'https://affari.herokuapp.com';
   }
 
   demo(): void {
@@ -53,6 +53,7 @@ export class PostmanService {
   }
 
   createTask(task: object): Observable<any> {
+    task['description'] = !! task['description'] ? task['description'] : '';
     const formData = new FormData();
     // tslint:disable-next-line: forin
     for (const key in task) {

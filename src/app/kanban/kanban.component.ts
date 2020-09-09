@@ -26,6 +26,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
   todoBkp: object[];
   inProgressBkp: object[];
   doneBkp: object[];
+  searchBkp = '';
   readonly taskStatus: any = {
     blocked: TaskStatus.BLOCKED,
     todo: TaskStatus.TODO,
@@ -64,6 +65,9 @@ export class KanbanComponent implements OnInit, OnDestroy {
       this.inProgressBkp = response.in_progress;
       this.doneBkp = response.done;
 
+      // Applyig search filter
+      this.applySearchFilter(this.searchBkp);
+
       if ((response.blocked.length + response.to_do.length
         + response.in_progress.length + response.done.length) > 0) { }
       else {
@@ -92,6 +96,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
 
   applySearchFilter(searchFilter: string): void{
     searchFilter = searchFilter.toLowerCase();
+    this.searchBkp = searchFilter;
     this.blocked = this.filterKanBan(this.blockedBkp, searchFilter);
     this.todo = this.filterKanBan(this.todoBkp, searchFilter);
     this.inProgress = this.filterKanBan(this.inProgressBkp, searchFilter);

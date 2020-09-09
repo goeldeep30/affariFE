@@ -19,6 +19,7 @@ export class TaskCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.desktop = false;
+    this.task.description = this.task.description ? this.task.description : '';
     if (window.screen.width > 1000) {
       this.desktop = true;
     }
