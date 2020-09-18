@@ -9,8 +9,8 @@ export class PostmanService {
   private URL: string;
 
   constructor(private http: HttpClient) {
-    this.URL = 'http://localhost:5000';
-    // this.URL = 'https://affari.herokuapp.com';
+    // this.URL = 'http://localhost:5000';
+    this.URL = 'https://affari.herokuapp.com';
   }
 
   demo(): void {
