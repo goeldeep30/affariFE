@@ -145,4 +145,13 @@ export class KanbanComponent implements OnInit, OnDestroy {
     });
   }
 
+  downloadJSON(): void{
+    const temp: object[] = [];
+    temp.push(this.blockedBkp);
+    temp.push(this.todoBkp);
+    temp.push(this.inProgressBkp);
+    temp.push(this.doneBkp);
+    console.log(JSON.stringify(temp));
+  }
+
 }

@@ -1,6 +1,7 @@
 <app-navbar [isUserLoggedIn]="true" (newSearchFilterEvent)="applySearchFilter($event)"></app-navbar>
 <div>
   <button mat-stroked-button color="accent" (click)="openDialog()">Create new</button>
+  <!-- <button (click)="downloadJSON()"></button> -->
   <div class="container-fluid">
     <div cdkDropListGroup class="row kanban">
 
