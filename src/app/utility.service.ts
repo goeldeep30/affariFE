@@ -6,6 +6,7 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { Observable, Subject } from 'rxjs';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
+import { InputDialogComponent } from './input-dialog/input-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,12 @@ export class UtilityService {
   public openConfirmDialog(heading: string, subHeading: string): MatDialogRef<ConfirmDialogComponent>{
     return this.matDialog.open(ConfirmDialogComponent, {
       data: {heading, subHeading},
+    });
+  }
+
+  public openInputDialog(heading: string): MatDialogRef<InputDialogComponent>{
+    return this.matDialog.open(InputDialogComponent, {
+      data: {heading},
     });
   }
 

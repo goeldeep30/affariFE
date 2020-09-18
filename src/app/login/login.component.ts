@@ -50,6 +50,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  onForgotPassword(): void {
+    this.utilityService.openInputDialog('Are you sure ?');
+  }
+
   navigateToSignUp(): void{
     this.routingService.navigateToSignUp();
   }

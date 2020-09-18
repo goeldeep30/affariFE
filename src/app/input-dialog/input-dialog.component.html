@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>
+    <form #passwordResetForm="ngForm" (ngSubmit)="onSubmit(passwordResetForm)" [formGroup]="userPasswordResetForm">
+        <div class="form-group">
+            <mat-form-field>
+              <mat-label>Enter your email</mat-label>
+              <input required matInput type="email" name="username" placeholder="pat@example.com" id="inputEmail" formControlName="username" ngModel >
+              <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <button type="submit" class="btn btn-primary" mat-dialog-close>Submit</button>
+    </form>
+</mat-dialog-content>

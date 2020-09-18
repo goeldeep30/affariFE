@@ -30,6 +30,7 @@ import { SignupComponent } from './signup/signup.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { HomeComponent } from './home/home.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { InputDialogComponent } from './input-dialog/input-dialog.component';
 
 
 @NgModule({
@@ -48,12 +49,14 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ProjectCardComponent,
     HomeComponent,
     ConfirmDialogComponent,
+    InputDialogComponent,
   ],
   entryComponents: [
     CreateTaskComponent,
     CreateProjectComponent,
     InfoDialogComponent,
     ConfirmDialogComponent,
+    InputDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -119,6 +119,14 @@ export class PostmanService {
     return this.http.delete(this.URL + '/logout', { responseType: 'json' });
   }
 
+  userResetPassword(user: object): Observable<any> {
+    return this.http.post(
+      this.URL + '/sendResetPasswordEmail',
+      user,
+      {responseType: 'json' }
+    );
+  }
+
 
 
 
