@@ -51,7 +51,12 @@ export class LoginComponent implements OnInit {
   }
 
   onForgotPassword(): void {
-    this.utilityService.openInputDialog('Are you sure ?');
+    this.utilityService.openInputDialog('Are you sure ?').afterClosed()
+    .subscribe((result) => {
+      if (result) {
+        this.utilityService.openInfoBar('Sending Confirmation Email');
+      }
+    });
   }
 
   navigateToSignUp(): void{

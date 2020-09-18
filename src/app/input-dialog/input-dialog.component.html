@@ -8,6 +8,6 @@
               <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
         </div>
-        <button type="submit" class="btn btn-primary" mat-dialog-close>Submit</button>
+        <button type="submit" class="btn btn-primary" [mat-dialog-close]="true">Submit</button>
     </form>
 </mat-dialog-content>

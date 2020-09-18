@@ -25,7 +25,7 @@ export class InputDialogComponent implements OnInit {
 
   sendPasswordResetLink(user: object): void {
     this.postmanService.userResetPassword(user).subscribe((response) => {
-      this.utilityService.openInfoDialog("reset", response?.msg);
+      this.utilityService.openInfoDialog('reset', response?.msg);
 
     }, error => {
       this.utilityService.openInfoDialog('Error', error);
