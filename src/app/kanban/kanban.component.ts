@@ -6,7 +6,7 @@ import { PostmanService } from '../postman.service';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { TaskStatus } from '../enums';
 import { UtilityService } from '../utility.service';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 
 
 @Component({
@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 export class KanbanComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   private projectId: number;
+  private updateSubscription: Subscription;
   blocked: object[] = [];
   todo: object[] = [];
   inProgress: object[]  = [];
@@ -42,6 +43,9 @@ export class KanbanComponent implements OnInit, OnDestroy {
     this.projectId = +this.route.snapshot.paramMap.get('projectid');
     // const filterQry: string = this.route.snapshot.paramMap.get('search');
     this.updateKanban();
+    this.updateSubscription = interval(5000).subscribe(
+      (val) => { this.updateKanban();
+      });
     // this.filterKanBan(filterQry);
     this.subscription = this.utilityService.getMessage().subscribe(message => {
       if (message) {
@@ -51,6 +55,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.updateSubscription.unsubscribe();
   }
 
   private updateKanban(): void {

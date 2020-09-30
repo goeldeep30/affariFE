@@ -4,7 +4,7 @@ import { RoutingService } from '../routing.service';
 import { UtilityService } from '../utility.service';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 
 
 @Component({
@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
   projects: object[];
+  private updateSubscription: Subscription;
   // Bkp needed to reset search filter
   projectsBkp: object[];
   subscription: Subscription;
@@ -24,6 +25,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
               private matDialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.updateSubscription = interval(5000).subscribe(
+      (val) => { this.getProjects();
+      });
     this.getProjects();
     this.subscription = this.utilityService.getMessage().subscribe(message => {
       if (message) {
@@ -34,6 +38,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void{
     this.subscription.unsubscribe();
+    this.updateSubscription.unsubscribe();
   }
 
   private getProjects(): void {
