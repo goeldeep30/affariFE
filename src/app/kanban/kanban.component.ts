@@ -79,7 +79,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
         this.utilityService.openInfoBar('No data to present');
       }
     }, error => {
-      this.utilityService.openInfoDialog('Error', error);
+      this.utilityService.openInfoBar('Error, Please check your connection','');
     }
     );
   }
